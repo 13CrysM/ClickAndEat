@@ -1,0 +1,83 @@
+﻿<Window x:Class="ClickAndEat.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClickAndEat"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="320">
+    <Grid Background="#FF37834D">
+        <!--
+        <Image x:Name="image" HorizontalAlignment="Center" Height="122" Margin="0,26,0,0" VerticalAlignment="Top" Width="116" RenderTransformOrigin="0.507,0.512" Source="/logo.png">
+            <Image.OpacityMask>
+                <ImageBrush ImageSource="/Image/logo.png"/>
+            </Image.OpacityMask>
+        </Image>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0,152,0,0" TextWrapping="Wrap" Text="Click and Eat" VerticalAlignment="Top" Width="158" Background="{x:Null}" FontFamily="Arial" FontWeight="Bold" TextAlignment="Center" FontSize="24" Foreground="#FFE0EDD3" Height="30"/>
+        <TextBlock x:Name="textBlock_Copiar" HorizontalAlignment="Center" Margin="0,185,0,0" TextWrapping="Wrap" Text="Menú semanal asesorado por expertos en nutrición" VerticalAlignment="Top" Width="220" Background="{x:Null}" FontFamily="Arial" TextAlignment="Center" FontSize="14" Foreground="#acecaf" Height="35"/>
+        <Border CornerRadius="12"
+            Background="#FF66B878"
+            Margin="0,225,0,0"
+            Height="38"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Width="220">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image x:Name="icon_email" HorizontalAlignment="Left" Height="21" 
+                           Margin="10,0,0,0" VerticalAlignment="Center" Width="21" 
+                           Source="/icon_email.png" RenderTransformOrigin="0.452,0.126"/>
+                <TextBox x:Name="email" HorizontalAlignment="Left" 
+                             TextWrapping="Wrap" Text="Email" VerticalAlignment="Center" 
+                             Width="173" TextChanged="textBox_TextChanged_1" Height="28" 
+                             Background="#FF66B878" FontFamily="Arial" FontWeight="Bold" 
+                             Foreground="#FFE0EDD3" 
+                             VerticalContentAlignment="Center" Margin="41,0,0,0" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"></TextBox>
+            </Grid>
+        </Border>
+        <Border CornerRadius="12"
+            Background="#FF66B878"
+            Margin="0,270,0,0"
+            Height="38"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Width="220">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image x:Name="icon_password" HorizontalAlignment="Left" Height="21" 
+                   Margin="10,0,0,0" VerticalAlignment="Center" Width="21" 
+                   Source="/icon_password.png" RenderTransformOrigin="0.452,0.126"/>
+                <TextBox x:Name="password" HorizontalAlignment="Left" 
+                     TextWrapping="Wrap" Text="Password" VerticalAlignment="Center" 
+                     Width="173" TextChanged="textBox_TextChanged_1" Height="28" 
+                     Background="#FF66B878" FontFamily="Arial" FontWeight="Bold" 
+                     Foreground="#FFE0EDD3" 
+                     VerticalContentAlignment="Center" Margin="41,0,0,0" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"></TextBox>
+            </Grid>
+        </Border>
+        <Button Background="#96d28a" Height="35"
+                x:Name="button" Content="Log in" HorizontalAlignment="Center" 
+                Margin="0,316,0,0" VerticalAlignment="Top" Width="220"
+                FontFamily="Arial" FontWeight="Bold" Foreground="#FF2F753D" BorderBrush="{x:Null}">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                    CornerRadius="12"
+                    Padding="5"
+                    SnapsToDevicePixels="True">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  RecognizesAccessKey="True"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="button_signup" Content="Sign Up" HorizontalAlignment="Left" 
+                Margin="50,356,0,0" VerticalAlignment="Top" Width="49" 
+                Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFACECAF" 
+                FontFamily="Arial" Click="button1_Click" FontWeight="Regular"/>
+        <Button x:Name="button_forgot" Content="Forgot Password?" HorizontalAlignment="Left" 
+            Margin="169,356,0,0" VerticalAlignment="Top" Width="101" 
+            Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFACECAF" 
+            FontFamily="Arial" Click="button1_Click" FontWeight="Regular"/>
+        -->
+    </Grid>
+</Window>
