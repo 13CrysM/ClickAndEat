@@ -59,7 +59,8 @@
         <Button Background="#96d28a" Height="35"
                 x:Name="button" Content="Log in" HorizontalAlignment="Center" 
                 Margin="0,213,0,0" VerticalAlignment="Top" Width="220"
-                FontFamily="Arial" FontWeight="Bold" Foreground="#FF2F753D" Grid.Row="1">
+                FontFamily="Arial" FontWeight="Bold" Foreground="#FF2F753D" Grid.Row="1"
+                Click="Login_Click">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}"

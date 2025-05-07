@@ -44,5 +44,11 @@ namespace ClickAndEat.View
         {
 
         }
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
+            Menu menu = new Menu();
+            menu.Show();
+            this.Close();
+        }
     }
 }
