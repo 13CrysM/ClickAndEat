@@ -55,9 +55,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CustomControls\BindablePasswordBox.xaml.cs">
+      <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\IUserModel.cs" />
+    <Compile Include="Model\UserAccountModel.cs" />
+    <Compile Include="Model\UserModel.cs" />
+    <Compile Include="Repositories\RepositoryBase.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\RecordViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="ViewModel\ViewModelCommand.cs" />
     <Compile Include="View\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Page Include="CustomControls\BindablePasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -114,8 +130,10 @@
     <Resource Include="Image\icon_password.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="ViewModel\" />
+    <Resource Include="Image\user-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\key-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
