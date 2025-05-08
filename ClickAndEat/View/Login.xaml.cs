@@ -44,5 +44,19 @@ namespace ClickAndEat.View
         {
 
         }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            Principal menu = new Principal();
+            menu.Show();
+            this.Close();
+        }
+
+        private void button_signup_Click(object sender, RoutedEventArgs e)
+        {
+            RecordsView registro = new RecordsView();
+            registro.Show();
+            this.Close();
+        }
     }
 }

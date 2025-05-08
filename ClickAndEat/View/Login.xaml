@@ -72,12 +72,26 @@
                      VerticalContentAlignment="Center" Margin="41,0,0,0" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"></TextBox>-->
             </Grid>
         </Border>
-        <Button Background="#96d28a" Height="35" Command="{Binding LoginCommand}"  
-               x:Name="btnLogin" Content="Log in" HorizontalAlignment="Left"  
+        <Button x:Name="btnLogin" 
+                Command="{Binding LoginCommand}" 
+                Content="Log in" 
+                Foreground="#FF2F753D" 
+                Height="35"   
+               HorizontalAlignment="Left"  
                Margin="50,213,0,0" VerticalAlignment="Top" Width="220"  
-               FontFamily="Arial" FontWeight="Bold" Foreground="#FF2F753D" Grid.Row="1">  
-           <Button.Template>  
-               <ControlTemplate TargetType="Button">  
+               FontFamily="Arial" FontWeight="Bold" Grid.Row="1" Cursor="Hand" Click="btnLogin_Click">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#96d28a" />
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="AliceBlue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>  
+               <ControlTemplate TargetType="{x:Type Button}">  
                    <Border Background="{TemplateBinding Background}"  
                            CornerRadius="12"  
                            Padding="5"  
@@ -92,11 +106,13 @@
         <Button x:Name="button_signup" Content="Sign Up" HorizontalAlignment="Left" 
                 Margin="50,253,0,0" VerticalAlignment="Top" Width="49" 
                 Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFACECAF" 
-                FontFamily="Arial" Click="button1_Click" FontWeight="Regular" Grid.Row="1"/>
+                FontFamily="Arial" Click="button_signup_Click" FontWeight="Regular" Grid.Row="1"/>
         <Button x:Name="button_forgot" Content="Forgot Password?" HorizontalAlignment="Left" 
             Margin="169,253,0,0" VerticalAlignment="Top" Width="101" 
             Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFACECAF" 
             FontFamily="Arial" Click="button1_Click" FontWeight="Regular" Grid.Row="1"/>
+        <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" FontSize="12" FontWeight="Medium"
+                   FontFamily="Arial" Margin="50,0,50,0" TextWrapping="Wrap"/>
 
     </Grid>
 </Window>
