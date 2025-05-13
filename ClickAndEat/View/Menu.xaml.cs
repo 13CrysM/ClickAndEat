@@ -151,7 +151,37 @@ namespace ClickAndEat.View
         {
 
             
-        } 
+        }
 
+        private void btnMain_Click(object sender, RoutedEventArgs e)
+        {
+            Principal menu = new Principal();
+            menu.Show();
+            this.Close();
+        }
+
+        private void btnMenu_Click(object sender, RoutedEventArgs e)
+        {
+            Menu menu = new Menu();
+            menu.Show();
+            this.Close();
+        }
+
+        private void btnPromo_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnInicio_Click(object sender, RoutedEventArgs e)
+        {
+            Login inicio = new Login();
+            inicio.Show();
+            this.Close();
+        }
+
+        private void btnRegistro_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
