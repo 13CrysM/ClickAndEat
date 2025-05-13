@@ -9,6 +9,9 @@
         d:DataContext="{d:DesignInstance Type=viewmodel:ViewModelBase}"
         mc:Ignorable="d"
         Title="RecordsView" Height="500" Width="600">
+    <Window.Resources>
+        <viewmodel:RecordViewModel x:Key="users" />
+    </Window.Resources>
     <Grid Background="#c2f3cc">
         <!-- Barra de navegación -->
         <DockPanel LastChildFill="False" Background="#a4f0b7" Height="80" VerticalAlignment="Top">
@@ -20,11 +23,11 @@
 
                 <!-- Botones a la izquierda -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <Button Content="Quiénes somos" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" />
-                    <Button Content="Tu menú" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5"/>
-                    <Button Content="Promociones" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5"/>
-                    <Button x:Name="btnInicio" Content="Iniciar Sesión" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" Click="btnInicio_Click"/>
-                    <Button x:Name="btnRegistro" Content="Registrarse" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" Click="btnRegistro_Click"/>
+                    <Button Content="Quiénes somos" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnMain" Click="btnMain_Click" />
+                    <Button Content="Tu menú" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnMenu" Click="btnMenu_Click"/>
+                    <Button Content="Promociones" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnPromo" Click="btnPromo_Click"/>
+                    <Button Content="Iniciar Sesión" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnInicio" Click="btnInicio_Click"/>
+                    <Button Content="Registrarse" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnRegistro" Click="btnRegistro_Click"/>
 
                 </StackPanel>
             </StackPanel>

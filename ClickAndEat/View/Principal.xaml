@@ -21,9 +21,9 @@
 
                     <!-- Botones a la izquierda -->
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <Button Content="Quiénes somos" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" />
-                        <Button Content="Tu menú" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5"/>
-                        <Button Content="Promociones" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5"/>
+                        <Button Content="Quiénes somos" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnMain" Click="btnMain_Click" />
+                        <Button Content="Tu menú" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnMenu" Click="btnMenu_Click"/>
+                        <Button Content="Promociones" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnPromo" Click="btnPromo_Click"/>
                         <Button Content="Iniciar Sesión" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnInicio" Click="btnInicio_Click"/>
                         <Button Content="Registrarse" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnRegistro" Click="btnRegistro_Click"/>
 

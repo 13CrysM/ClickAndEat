@@ -14,7 +14,7 @@ namespace ClickAndEat
     /// </summary>
     public partial class App : Application
     {
-        private void Application_Startup(object sender, StartupEventArgs e)
+        /*private void Application_Startup(object sender, StartupEventArgs e)
         {
             var loginView = new Login();
             loginView.Show(); //Show para mostrar la ventana
@@ -25,6 +25,20 @@ namespace ClickAndEat
                     var mainView = new MainWindow();
                     mainView.Show();
                     loginView.Close();
+                }
+            };
+        }*/
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            var mainView = new Principal();
+            mainView.Show(); //Show para mostrar la ventana
+            mainView.IsVisibleChanged += (s, v) =>
+            {
+                if (mainView.IsVisible == false && mainView.IsLoaded)
+                {
+                    var princView = new MainWindow();
+                    princView.Show();
+                    mainView.Close();
                 }
             };
         }
