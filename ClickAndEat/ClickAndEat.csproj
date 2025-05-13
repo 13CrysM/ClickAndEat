@@ -59,13 +59,41 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+
+    <Compile Include="CustomControls\BindablePasswordBox.xaml.cs">
+      <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\IUserModel.cs" />
+    <Compile Include="Model\UserAccountModel.cs" />
+    <Compile Include="Model\UserModel.cs" />
+    <Compile Include="Repositories\RepositoryBase.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\RecordViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="ViewModel\ViewModelCommand.cs" />
+
     <Compile Include="Model\DatabaseHelper.cs" />
+
     <Compile Include="View\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
+
+    <Compile Include="View\Principal.xaml.cs">
+      <DependentUpon>Principal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RecordsView.xaml.cs">
+      <DependentUpon>RecordsView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="CustomControls\BindablePasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+
+
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -86,6 +114,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+
+    <Page Include="View\Principal.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\RecordsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -127,7 +165,17 @@
     <Resource Include="Image\icon_password.png" />
   </ItemGroup>
   <ItemGroup>
+
+    <Resource Include="Image\user-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\key-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\main-image.jpg" />
+
     <Folder Include="ViewModel\" />
+
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

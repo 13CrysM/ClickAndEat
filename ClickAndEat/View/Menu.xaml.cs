@@ -10,9 +10,11 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ClickAndEat.Model;
 using System.Data.SqlClient;
+
 
 namespace ClickAndEat.View
 {
@@ -24,7 +26,6 @@ namespace ClickAndEat.View
         public Menu()
         {
             InitializeComponent();
-
         }
 
         private void btnIngresarMenu_Click(object sender, RoutedEventArgs e)
@@ -143,11 +144,14 @@ namespace ClickAndEat.View
             txtCenaDistribucion.Text = "";
             txtCenaKcal.Text = "";
             txtCenaComentarios.Text = "";
+
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+
             
         } 
+
     }
 }

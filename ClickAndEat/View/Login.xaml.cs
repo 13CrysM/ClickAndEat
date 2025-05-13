@@ -44,11 +44,21 @@ namespace ClickAndEat.View
         {
 
         }
-        private void Login_Click(object sender, RoutedEventArgs e)
+
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            Menu menu = new Menu();
+            Principal menu = new Principal();
             menu.Show();
             this.Close();
         }
+
+        private void button_signup_Click(object sender, RoutedEventArgs e)
+        {
+            RecordsView registro = new RecordsView();
+            registro.Show();
+            this.Close();
+        }
+
     }
 }
