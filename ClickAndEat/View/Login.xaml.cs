@@ -45,6 +45,7 @@ namespace ClickAndEat.View
 
         }
 
+
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             Principal menu = new Principal();
@@ -58,5 +59,6 @@ namespace ClickAndEat.View
             registro.Show();
             this.Close();
         }
+
     }
 }

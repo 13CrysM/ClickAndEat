@@ -72,6 +72,7 @@
                      VerticalContentAlignment="Center" Margin="41,0,0,0" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"></TextBox>-->
             </Grid>
         </Border>
+
         <Button x:Name="btnLogin" 
                 Command="{Binding LoginCommand}" 
                 Content="Log in" 
@@ -102,6 +103,7 @@
                    </Border>  
                </ControlTemplate>  
            </Button.Template>  
+
         </Button>
         <Button x:Name="button_signup" Content="Sign Up" HorizontalAlignment="Left" 
                 Margin="50,253,0,0" VerticalAlignment="Top" Width="49" 
