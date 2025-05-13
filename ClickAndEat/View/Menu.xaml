@@ -151,29 +151,36 @@
 
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Platillo:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                        <TextBox Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                        <TextBox x:Name="txtDesayunoPlatillo" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Ingredientes:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                        <TextBox Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                        <TextBox x:Name="txtDesayunoIngredientes" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <!-- <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Distribución:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                        <ComboBox Width="120" Style="{StaticResource RoundedComboBoxStyle}">
-                            <ComboBoxItem Content="Nutrientes" IsSelected="True" />
+                        <ComboBox x:Name="cmbDesayunoDistribucion" Width="120" Style="{StaticResource RoundedComboBoxStyle}" SelectedIndex="0">
+                            <ComboBoxItem Content="Nutrientes"/>
+                            <ComboBoxItem Content="Calorías"/>
+                            <ComboBoxItem Content="Proteínas"/>
                         </ComboBox>
+                    </StackPanel> -->
+
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Distribucion:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtDesayunoDistribucion" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="kcal:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                        <TextBox Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                        <TextBox x:Name="txtDesayunoKcal" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Comentarios:" FontWeight="Bold" Width="80" VerticalAlignment="Top"/>
-                        <TextBox Width="120" Height="60" TextWrapping="Wrap" Style="{StaticResource RoundedTextBoxStyle}" TextChanged="TextBox_TextChanged"/>
+                        <TextBox x:Name="txtDesayunoComentarios" Width="120" Height="60" TextWrapping="Wrap" Style="{StaticResource RoundedTextBoxStyle}" TextChanged="TextBox_TextChanged"/>
                     </StackPanel>
                 </StackPanel>
 
@@ -183,29 +190,36 @@
 
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Platillo:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                        <TextBox Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                        <TextBox x:Name="txtComidaPlatillo" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Ingredientes:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                        <TextBox Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                        <TextBox x:Name="txtComidaIngredientes" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <!--<StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Distribución:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                        <ComboBox Width="120" Style="{StaticResource RoundedComboBoxStyle}">
-                            <ComboBoxItem Content="Nutrientes" IsSelected="True"/>
+                        <ComboBox x:Name="cmbComidaDistribucion" Width="120" Style="{StaticResource RoundedComboBoxStyle}" SelectedIndex="0">
+                            <ComboBoxItem Content="Nutrientes"/>
+                            <ComboBoxItem Content="Calorías"/>
+                            <ComboBoxItem Content="Proteínas"/>
                         </ComboBox>
+                    </StackPanel>-->
+
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Distribucion:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtComidaDistribucion" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="kcal:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                        <TextBox Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                        <TextBox x:Name="txtComidaKcal" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Comentarios:" FontWeight="Bold" Width="80" VerticalAlignment="Top"/>
-                        <TextBox Width="120" Height="60" TextWrapping="Wrap" Style="{StaticResource RoundedTextBoxStyle}"/>
+                        <TextBox x:Name="txtComidaComentarios" Width="120" Height="60" TextWrapping="Wrap" Style="{StaticResource RoundedTextBoxStyle}"/>
                     </StackPanel>
                 </StackPanel>
 
@@ -215,29 +229,36 @@
 
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Platillo:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                        <TextBox Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                        <TextBox x:Name="txtCenaPlatillo"  Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Ingredientes:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                        <TextBox Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                        <TextBox x:Name="txtCenaIngredientes" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <!--<StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Distribución:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                        <ComboBox Width="120" Style="{StaticResource RoundedComboBoxStyle}" >
-                            <ComboBoxItem Content="Nutrientes" IsSelected="True"/>
+                        <ComboBox x:Name="cmbCenaDistribucion" Width="120" Style="{StaticResource RoundedComboBoxStyle}" SelectedIndex="0" >
+                            <ComboBoxItem Content="Nutrientes"/>
+                            <ComboBoxItem Content="Calorías"/>
+                            <ComboBoxItem Content="Proteínas"/>
                         </ComboBox>
+                    </StackPanel>-->
+
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Distribucion:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtCenaDistribucion" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="kcal:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                        <TextBox Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                        <TextBox x:Name="txtCenaKcal"  Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Comentarios:" FontWeight="Bold" Width="80" VerticalAlignment="Top"/>
-                        <TextBox Width="120" Height="60" TextWrapping="Wrap" Style="{StaticResource RoundedTextBoxStyle}"/>
+                        <TextBox x:Name="txtCenaComentarios" Width="120" Height="60" TextWrapping="Wrap" Style="{StaticResource RoundedTextBoxStyle}"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>
@@ -246,7 +267,8 @@
             <Button Content="Ingresar Menú" Width="150" Height="40"
                     Background="#96d28a" Foreground="Black" FontWeight="Bold"
                     HorizontalAlignment="Center" Margin="0,10"
-                    BorderThickness="0" Padding="5" FontSize="14">
+                    BorderThickness="0" Padding="5" FontSize="14"
+                    Click="btnIngresarMenu_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}"
