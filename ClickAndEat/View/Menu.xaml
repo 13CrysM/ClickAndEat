@@ -1,0 +1,283 @@
+﻿<Window x:Class="ClickAndEat.View.Menu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Menu" Height="550" Width="900">
+    <Window.Resources>
+        <!-- Estilo para cajas de texto ovaladas -->
+        <Style x:Key="RoundedTextBoxStyle" TargetType="TextBox">
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="MinHeight" Value="25"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border CornerRadius="12"
+                                Background="White"
+                                BorderBrush="Gray"
+                                BorderThickness="1"
+                                SnapsToDevicePixels="True">
+                            <ScrollViewer Margin="5" x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Estilo para ComboBox ovalado -->
+        <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <Border x:Name="Border"
+                Grid.ColumnSpan="2"
+                CornerRadius="12"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}" />
+                <Path x:Name="Arrow"
+              Grid.Column="1"
+              Fill="Gray"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Data="M 0 0 L 4 4 L 8 0 Z"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Border" Property="Background" Value="#E6F0F5"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="Border" Property="Background" Value="#D9EAF3"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName="Border" Property="Background" Value="#FFF4F4F4"/>
+                    <Setter TargetName="Border" Property="BorderBrush" Value="#FFADB2B5"/>
+                    <Setter TargetName="Arrow" Property="Fill" Value="#FFAAAAAA"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style x:Key="RoundedComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="MinHeight" Value="25"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton Name="ToggleButton"
+                                  Grid.Column="2"
+                                  Template="{StaticResource ComboBoxToggleButton}"
+                                  Focusable="false"
+                                  IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                  ClickMode="Press" />
+
+                            <ContentPresenter Name="ContentSite"
+                                      IsHitTestVisible="False"
+                                      Content="{TemplateBinding SelectionBoxItem}"
+                                      ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                      ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                      Margin="5,0,25,0"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Left" />
+
+                            <Popup Name="Popup"
+                           Placement="Bottom"
+                           IsOpen="{TemplateBinding IsDropDownOpen}"
+                           AllowsTransparency="True"
+                           Focusable="False"
+                           PopupAnimation="Slide">
+                                <Grid Name="DropDown"
+                              SnapsToDevicePixels="True"
+                              MinWidth="{TemplateBinding ActualWidth}"
+                              MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border Background="White" BorderBrush="Gray" BorderThickness="1" CornerRadius="12">
+                                        <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                        </ScrollViewer>
+                                    </Border>
+                                </Grid>
+                            </Popup>
+
+                            <Border x:Name="Border" CornerRadius="12" Background="White" BorderBrush="Gray" BorderThickness="1"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="#FFF4F4F4"/>
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#FFADB2B5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
+    <Grid Background="#c2f3cc">
+        <!-- Fondo general -->
+
+        <!-- Barra de navegación -->
+        <DockPanel LastChildFill="False" Background="#a4f0b7" Height="80" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10">
+                <Image Source="/Image/logo.png" Height="70" Width="80" />
+                <StackPanel Orientation="Vertical" Margin="5,0,30,0" VerticalAlignment="Center">
+                    <!-- <TextBlock Text="CLICK AND EAT" FontWeight="Bold" FontSize="14" Foreground="Black" /> -->
+                </StackPanel>
+
+                <!-- Botones a la izquierda -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button Content="Quiénes somos" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" />
+                    <Button Content="Tu menú" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5"/>
+                    <Button Content="Promociones" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5"/>
+                    <Button Content="Iniciar Sesión - Registrarse" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5"/>
+                </StackPanel>
+            </StackPanel>
+        </DockPanel>
+
+        <!-- Contenido principal -->
+        <StackPanel Margin="0,90,0,0">
+            <TextBlock Text="Sube tu menú" FontSize="20" FontWeight="Bold" Foreground="#333" HorizontalAlignment="Left" Margin="25,10"/>
+            <Grid Margin="20,10" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+    
+                <!-- Columna Desayuno -->
+                <StackPanel Grid.Column="0" Margin="0,10,50,10">
+                    <TextBlock Text="Desayuno" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" />
+
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Platillo:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtDesayunoPlatillo" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Ingredientes:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtDesayunoIngredientes" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                    </StackPanel>
+
+                    <!-- <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Distribución:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="cmbDesayunoDistribucion" Width="120" Style="{StaticResource RoundedComboBoxStyle}" SelectedIndex="0">
+                            <ComboBoxItem Content="Nutrientes"/>
+                            <ComboBoxItem Content="Calorías"/>
+                            <ComboBoxItem Content="Proteínas"/>
+                        </ComboBox>
+                    </StackPanel> -->
+
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Distribucion:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtDesayunoDistribucion" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="kcal:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtDesayunoKcal" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Comentarios:" FontWeight="Bold" Width="80" VerticalAlignment="Top"/>
+                        <TextBox x:Name="txtDesayunoComentarios" Width="120" Height="60" TextWrapping="Wrap" Style="{StaticResource RoundedTextBoxStyle}" TextChanged="TextBox_TextChanged"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Columna Comida -->
+                <StackPanel Grid.Column="1" Margin="10">
+                    <TextBlock Text="Comida" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" />
+
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Platillo:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtComidaPlatillo" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Ingredientes:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtComidaIngredientes" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                    </StackPanel>
+
+                    <!--<StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Distribución:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="cmbComidaDistribucion" Width="120" Style="{StaticResource RoundedComboBoxStyle}" SelectedIndex="0">
+                            <ComboBoxItem Content="Nutrientes"/>
+                            <ComboBoxItem Content="Calorías"/>
+                            <ComboBoxItem Content="Proteínas"/>
+                        </ComboBox>
+                    </StackPanel>-->
+
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Distribucion:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtComidaDistribucion" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="kcal:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtComidaKcal" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Comentarios:" FontWeight="Bold" Width="80" VerticalAlignment="Top"/>
+                        <TextBox x:Name="txtComidaComentarios" Width="120" Height="60" TextWrapping="Wrap" Style="{StaticResource RoundedTextBoxStyle}"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Columna Cena -->
+                <StackPanel Grid.Column="2" Margin="50,10,0,10">
+                    <TextBlock Text="Cena" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" />
+
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Platillo:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtCenaPlatillo"  Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Ingredientes:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtCenaIngredientes" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                    </StackPanel>
+
+                    <!--<StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Distribución:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="cmbCenaDistribucion" Width="120" Style="{StaticResource RoundedComboBoxStyle}" SelectedIndex="0" >
+                            <ComboBoxItem Content="Nutrientes"/>
+                            <ComboBoxItem Content="Calorías"/>
+                            <ComboBoxItem Content="Proteínas"/>
+                        </ComboBox>
+                    </StackPanel>-->
+
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Distribucion:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtCenaDistribucion" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="kcal:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
+                        <TextBox x:Name="txtCenaKcal"  Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                        <TextBlock Text="Comentarios:" FontWeight="Bold" Width="80" VerticalAlignment="Top"/>
+                        <TextBox x:Name="txtCenaComentarios" Width="120" Height="60" TextWrapping="Wrap" Style="{StaticResource RoundedTextBoxStyle}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+
+            <!-- Botón Ingresar Menú -->
+            <Button Content="Ingresar Menú" Width="150" Height="40"
+                    Background="#96d28a" Foreground="Black" FontWeight="Bold"
+                    HorizontalAlignment="Center" Margin="0,10"
+                    BorderThickness="0" Padding="5" FontSize="14"
+                    Click="btnIngresarMenu_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="20" Padding="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>
