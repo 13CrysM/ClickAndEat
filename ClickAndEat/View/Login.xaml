@@ -77,11 +77,11 @@
         <Button x:Name="button_signup" Content="Sign Up" HorizontalAlignment="Left" 
                 Margin="50,253,0,0" VerticalAlignment="Top" Width="49" 
                 Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFACECAF" 
-                FontFamily="Arial" Click="button1_Click" FontWeight="Regular" Grid.Row="1"/>
+                FontFamily="Arial" Click="button_signup_Click" FontWeight="Regular" Grid.Row="1"/>
         <Button x:Name="button_forgot" Content="Forgot Password?" HorizontalAlignment="Left" 
             Margin="169,253,0,0" VerticalAlignment="Top" Width="101" 
             Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFACECAF" 
-            FontFamily="Arial" Click="button1_Click" FontWeight="Regular" Grid.Row="1"/>
+            FontFamily="Arial" Click="button_forgot_Click" FontWeight="Regular" Grid.Row="1"/>
 
     </Grid>
 </Window>
