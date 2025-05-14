@@ -94,28 +94,9 @@ namespace ClickAndEat.View
                 return false;
             }
 
-// Resto de validaciones...
             return true;
         }
-        /*{
-            // Validar que los campos obligatorios no estén vacíos
-            if (string.IsNullOrWhiteSpace(txtDesayunoPlatillo.Text))
-            {
-                MostrarError("Por favor ingrese el platillo del desayuno", txtDesayunoPlatillo);
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtDesayunoKcal.Text))
-            {
-                MostrarError("Por favor ingrese las kcal del desayuno", txtDesayunoKcal);
-                return false;
-            }
-
-            // Agregar validaciones similares para comida y cena si son requeridas
-
-            return true;
-        }*/
-
+        
         private void MostrarError(string mensaje, Control control)
         {
             MessageBox.Show(mensaje, "Validación", MessageBoxButton.OK, MessageBoxImage.Warning);

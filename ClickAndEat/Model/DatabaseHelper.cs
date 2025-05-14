@@ -135,30 +135,30 @@ namespace ClickAndEat.Model
 
         // Método para verificar credenciales de usuario
         public bool ValidarUsuario(string email, string password)
-        {
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                string query = "SELECT Password FROM Usuarios WHERE Email = @Email";
-                SqlCommand cmd = new SqlCommand(query, connection);
-                cmd.Parameters.AddWithValue("@Email", email);
+{
+    using (var connection = new SqlConnection(_connectionString))
+    {
+        string query = "SELECT Password FROM Usuarios WHERE Email = @Email";
+        SqlCommand cmd = new SqlCommand(query, connection);
+        cmd.Parameters.AddWithValue("@Email", email);
 
-                connection.Open();
-                var storedPassword = cmd.ExecuteScalar()?.ToString();
-
-                if (storedPassword == null) return false;
-
-                // Verificación temporal sin BCrypt (SOLO PARA DESARROLLO)
-                return storedPassword == password;
-
-                /* Versión producción (comentada):
-                try {
-                    return BCrypt.Net.BCrypt.Verify(password, storedPassword);
-                } catch {
-                    return false;
-                }
-                */
-            }
+        connection.Open();
+        var storedPassword = cmd.ExecuteScalar()?.ToString();
+        
+        if (storedPassword == null) return false;
+        
+        // Verificación temporal sin BCrypt (SOLO PARA DESARROLLO)
+        return storedPassword == password;
+        
+        /* Versión producción (comentada):
+        try {
+            return BCrypt.Net.BCrypt.Verify(password, storedPassword);
+        } catch {
+            return false;
         }
+        */
+    }
+}
         public void GuardarMenuCompleto(
             string desayunoPlatillo, string desayunoIngredientes, string desayunoDistribucion,
             string desayunoKcal, string desayunoComentarios,
