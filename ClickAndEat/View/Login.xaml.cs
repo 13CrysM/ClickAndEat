@@ -52,7 +52,6 @@ namespace ClickAndEat.View
             string userEmail = email.Text.Trim();
             string userPassword = password.Text.Trim();
 
-            // Validaciones básicas
             if (userEmail == "Email" || string.IsNullOrWhiteSpace(userEmail))
             {
                 MessageBox.Show("Por favor ingrese su email", "Campo requerido",
@@ -69,37 +68,80 @@ namespace ClickAndEat.View
                 return;
             }
 
+
             try
             {
                 using (DatabaseHelper db = new DatabaseHelper())
                 {
-                    if (db.ValidarUsuario(userEmail, userPassword))
+                    // Modificamos para obtener el ID del usuario
+                    var usuario = db.ObtenerUsuarioPorCredenciales(userEmail, userPassword);
+
+                    if (usuario != null)
                     {
-                        // Autenticación exitosa
-                        Menu menu = new Menu();
-                        menu.Show();
+                        // Pasamos el ID del usuario al constructor de Menu
+                        Menu menuWindow = new Menu(usuario.Id);
+                        menuWindow.Show();
                         this.Close();
                     }
                     else
                     {
-                        MessageBox.Show("Email o contraseña incorrectos", "Autenticación fallida",
-                                      MessageBoxButton.OK, MessageBoxImage.Error);
-                        password.SelectAll();
-                        password.Focus();
+                        MessageBox.Show("Email o contraseña incorrectos");
                     }
                 }
             }
-            catch (SqlException ex)
-            {
-                MessageBox.Show($"Error de conexión a la base de datos: {ex.Message}",
-                              "Error técnico", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error inesperado: {ex.Message}",
-                              "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Error: {ex.Message}");
             }
         }
+        // Validaciones básicas
+        /*if (userEmail == "Email" || string.IsNullOrWhiteSpace(userEmail))
+        {
+            MessageBox.Show("Por favor ingrese su email", "Campo requerido",
+                          MessageBoxButton.OK, MessageBoxImage.Warning);
+            email.Focus();
+            return;
+        }
+
+        if (userPassword == "Password" || string.IsNullOrWhiteSpace(userPassword))
+        {
+            MessageBox.Show("Por favor ingrese su contraseña", "Campo requerido",
+                          MessageBoxButton.OK, MessageBoxImage.Warning);
+            password.Focus();
+            return;
+        }
+
+        try
+        {
+            using (DatabaseHelper db = new DatabaseHelper())
+            {
+                if (db.ValidarUsuario(userEmail, userPassword))
+                {
+                    // Autenticación exitosa
+                    Menu menu = new Menu();
+                    menu.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Email o contraseña incorrectos", "Autenticación fallida",
+                                  MessageBoxButton.OK, MessageBoxImage.Error);
+                    password.SelectAll();
+                    password.Focus();
+                }
+            }
+        }
+        catch (SqlException ex)
+        {
+            MessageBox.Show($"Error de conexión a la base de datos: {ex.Message}",
+                          "Error técnico", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error inesperado: {ex.Message}",
+                          "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }*/
 
         private void button_signup_Click(object sender, RoutedEventArgs e)
         {

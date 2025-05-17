@@ -127,7 +127,7 @@
 
                 <!-- Botones a la izquierda -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <Button Content="Quiénes somos" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" />
+                    <Button Content="Quiénes somos" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5"/>
                     <Button Content="Tu menú" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5"/>
                     <Button Content="Promociones" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5"/>
                     <Button Content="Iniciar Sesión" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5"/>
@@ -180,7 +180,7 @@
 
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Comentarios:" FontWeight="Bold" Width="80" VerticalAlignment="Top"/>
-                        <TextBox x:Name="txtDesayunoComentarios" Width="120" Height="60" TextWrapping="Wrap" Style="{StaticResource RoundedTextBoxStyle}" TextChanged="TextBox_TextChanged"/>
+                        <TextBox x:Name="txtDesayunoComentarios" Width="120" Height="60" TextWrapping="Wrap" Style="{StaticResource RoundedTextBoxStyle}"/>
                     </StackPanel>
                 </StackPanel>
 

@@ -165,7 +165,8 @@ namespace ClickAndEat.Model
             string comidaPlatillo, string comidaIngredientes, string comidaDistribucion,
             string comidaKcal, string comidaComentarios,
             string cenaPlatillo, string cenaIngredientes, string cenaDistribucion,
-            string cenaKcal, string cenaComentarios)
+            string cenaKcal, string cenaComentarios,
+            int usuarioId)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -201,9 +202,36 @@ namespace ClickAndEat.Model
                 command.Parameters.AddWithValue("@CenaKcal", cenaKcal);
                 command.Parameters.AddWithValue("@CenaComentarios", cenaComentarios);
 
+                command.Parameters.AddWithValue("@UsuarioId", usuarioId);
+
                 connection.Open();
                 command.ExecuteNonQuery();
 
+            }
+        }
+
+        public Usuario ObtenerUsuarioPorCredenciales(string email, string password)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT Id, Email FROM Usuarios WHERE Email = @Email AND Password = @Password";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@Email", email);
+                cmd.Parameters.AddWithValue("@Password", password); // En producción usar BCrypt
+
+                connection.Open();
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return new Usuario
+                        {
+                            Id = Convert.ToInt32(reader["Id"]),
+                            Email = reader["Email"].ToString()
+                        };
+                    }
+                    return null;
+                }
             }
         }
 
