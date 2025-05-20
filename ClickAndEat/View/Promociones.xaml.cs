@@ -15,15 +15,14 @@ using System.Windows.Shapes;
 namespace ClickAndEat.View
 {
     /// <summary>
-    /// Lógica de interacción para Principal.xaml
+    /// Lógica de interacción para Promociones.xaml
     /// </summary>
-    public partial class Principal : Window
+    public partial class Promociones : Window
     {
-        public Principal()
+        public Promociones()
         {
             InitializeComponent();
         }
-
         private void btnInicio_Click(object sender, RoutedEventArgs e)
         {
             Login inicio = new Login();
@@ -31,19 +30,19 @@ namespace ClickAndEat.View
             this.Close();
         }
 
-        /*private void btnRegistro_Click(object sender, RoutedEventArgs e)
+        private void btnRegistro_Click(object sender, RoutedEventArgs e)
         {
-            var recordView = new RecordsView();
+            /*var recordView = new RecordsView();
             recordView.Show(); //Show para mostrar la ventana
-            this.Close();
-        }*/
+            this.Close();*/
+        }
 
-        /*private void btnMenu_Click(object sender, RoutedEventArgs e)
+        private void btnMenu_Click(object sender, RoutedEventArgs e)
         {
-                Menu menu = new Menu();
-                menu.Show();
-                this.Close();
-        }*/
+            /*Menu menu = new Menu();
+            menu.Show();
+            this.Close();*/
+        }
 
         private void btnMain_Click(object sender, RoutedEventArgs e)
         {
@@ -54,9 +53,6 @@ namespace ClickAndEat.View
 
         private void btnPromo_Click(object sender, RoutedEventArgs e)
         {
-            Promociones promos = new Promociones(); // Asume que tienes esta ventana
-            promos.Show();
-            this.Close();
 
         }
     }

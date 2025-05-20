@@ -86,6 +86,9 @@
     <Compile Include="View\Principal.xaml.cs">
       <DependentUpon>Principal.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Promociones.xaml.cs">
+      <DependentUpon>Promociones.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -107,6 +110,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Principal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Promociones.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -155,6 +162,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\main-image.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\img-promos.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
