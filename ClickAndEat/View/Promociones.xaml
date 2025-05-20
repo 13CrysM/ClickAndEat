@@ -1,11 +1,11 @@
-﻿<Window x:Class="ClickAndEat.View.Principal"
+﻿<Window x:Class="ClickAndEat.View.Promociones"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClickAndEat.View"
         mc:Ignorable="d"
-        Title="Principal" Height="440" Width="800">
+        Title="Promociones" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
@@ -33,7 +33,8 @@
         </Grid>
         <Grid Grid.Row="1">
             <StackPanel>
-                <Image Source="/Image/main-image.jpg" Stretch="Fill"/>
+                <Image Source="/Image/img-promos.jpg" Stretch="Fill"/>
+
             </StackPanel>
         </Grid>
     </Grid>

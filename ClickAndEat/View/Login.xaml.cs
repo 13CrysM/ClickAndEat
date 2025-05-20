@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ClickAndEat.Model;
+using System.Data.SqlClient;
+using System.Runtime.InteropServices;
+using System.Security; // para convertir SecureString a string
 
 namespace ClickAndEat.View
 {
@@ -22,9 +26,42 @@ namespace ClickAndEat.View
     {
         public Login()
         {
-            InitializeComponent();
-        }
 
+            InitializeComponent();
+
+            // Configuración inicial de los campos
+            email.Text = "Email";
+
+            //password.Text = "Password";
+
+            // Manejar eventos de foco para los campos
+            email.GotFocus += RemovePlaceholderText;
+            email.LostFocus += AddPlaceholderText;
+            //password.GotFocus += RemovePlaceholderText;
+            //password.LostFocus += AddPlaceholderText;
+        }
+        private void RemovePlaceholderText(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (textBox.Text == "Email" || textBox.Text == "Password")
+            {
+                textBox.Text = "";
+                //if (textBox == password)
+                //{
+                    // Cambiar a PasswordBox si quieres mayor seguridad
+                 //   textBox.FontWeight = FontWeights.Bold;
+                //}
+            }
+        }
+        private void AddPlaceholderText(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                textBox.Text = textBox == email ? "Email" : "Password";
+                textBox.FontWeight = FontWeights.Normal;
+            }
+        }
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
@@ -42,22 +79,83 @@ namespace ClickAndEat.View
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-
+            // Aquí implementarías la recuperación de contraseña
+            MessageBox.Show("Funcionalidad de recuperación en construcción", "Forgot Password",
+                          MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
-        {
-            Principal menu = new Principal();
-            menu.Show();
-            this.Close();
-        }
+        
 
         private void button_signup_Click(object sender, RoutedEventArgs e)
         {
-            RecordsView registro = new RecordsView();
-            registro.Show();
-            this.Close();
+            // Aquí implementarías la lógica para registro de nuevos usuarios
+            MessageBox.Show("Funcionalidad de registro en construcción", "Sign Up",
+                          MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            string userEmail = email.Text.Trim();
+
+            // Convertir SecureString a string
+            string userPassword = ConvertToUnsecureString(passwordControl.Password);
+
+            if (userEmail == "Email" || string.IsNullOrWhiteSpace(userEmail))
+            {
+                MessageBox.Show("Por favor ingrese su email", "Campo requerido",
+                              MessageBoxButton.OK, MessageBoxImage.Warning);
+                email.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(userPassword))
+            {
+                MessageBox.Show("Por favor ingrese su contraseña", "Campo requerido",
+                              MessageBoxButton.OK, MessageBoxImage.Warning);
+                passwordControl.Focus();
+                return;
+            }
+
+            try
+            {
+                using (DatabaseHelper db = new DatabaseHelper())
+                {
+                    var usuario = db.ObtenerUsuarioPorCredenciales(userEmail, userPassword);
+
+                    if (usuario != null)
+                    {
+                        Menu menuWindow = new Menu(usuario.Id);
+                        menuWindow.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Email o contraseña incorrectos");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+                AddPlaceholderText(email, null);
+            }
+        }
+        private string ConvertToUnsecureString(SecureString securePassword)
+        {
+            if (securePassword == null)
+                return string.Empty;
+
+            IntPtr unmanagedString = IntPtr.Zero;
+            try
+            {
+                unmanagedString = Marshal.SecureStringToGlobalAllocUnicode(securePassword);
+                return Marshal.PtrToStringUni(unmanagedString);
+            }
+            finally
+            {
+                Marshal.ZeroFreeGlobalAllocUnicode(unmanagedString);
+            }
         }
 
     }

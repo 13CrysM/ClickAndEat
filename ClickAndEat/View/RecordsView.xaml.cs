@@ -40,9 +40,9 @@ namespace ClickAndEat.View
 
         private void btnMenu_Click(object sender, RoutedEventArgs e)
         {
-            Menu menu = new Menu();
+            /*Menu menu = new Menu();
             menu.Show();
-            this.Close();
+            this.Close();*/
         }
 
         private void btnMain_Click(object sender, RoutedEventArgs e)
@@ -54,7 +54,9 @@ namespace ClickAndEat.View
 
         private void btnPromo_Click(object sender, RoutedEventArgs e)
         {
-
+            Promociones promo = new Promociones();
+            promo.Show();
+            this.Close();
         }
     }
 }
