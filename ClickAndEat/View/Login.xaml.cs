@@ -138,7 +138,6 @@ namespace ClickAndEat.View
             catch (Exception ex)
             {
                 MessageBox.Show($"Error: {ex.Message}");
-                AddPlaceholderText(email, null);
             }
         }
         private string ConvertToUnsecureString(SecureString securePassword)
