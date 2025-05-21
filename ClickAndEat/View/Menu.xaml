@@ -131,6 +131,7 @@
                     <Button Content="Tu menú" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5"/>
                     <Button Content="Promociones" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5"/>
                     <Button Content="Iniciar Sesión" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5"/>
+                    <Button Content="Cerrar sesión" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnCerrarSesion" Click="btnCerrarSesion_Click"/>
                 </StackPanel>
             </StackPanel>
         </DockPanel>

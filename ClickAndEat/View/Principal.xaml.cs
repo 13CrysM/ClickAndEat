@@ -57,7 +57,8 @@ namespace ClickAndEat.View
             Promociones promos = new Promociones(); // Asume que tienes esta ventana
             promos.Show();
             this.Close();
-
         }
+
+
     }
 }

@@ -167,5 +167,16 @@ namespace ClickAndEat.View
             txtCenaKcal.Text = "";
             txtCenaComentarios.Text = "";
         }
+        private void btnCerrarSesion_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("¿Estás segura de que deseas cerrar sesión?", "Cerrar sesión", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                Login login = new Login();
+                login.Show();
+                this.Close();
+            }
+        }
     }
 }
