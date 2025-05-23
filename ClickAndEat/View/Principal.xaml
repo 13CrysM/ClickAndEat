@@ -26,6 +26,8 @@
                         <Button Content="Promociones" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnPromo" Click="btnPromo_Click"/>
                         <Button Content="Iniciar Sesión" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnInicio" Click="btnInicio_Click"/>
                         <Button Content="Registrarse" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnRegistro" Click="btnRegistro_Click"/>
+                        <Button Content="Lista Usuarios" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnUsers" Click="btnUsers_Click"/>
+                        <Button Content="Lista Menus" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnMenus" Click="btnMenus_Click"/>
 
                     </StackPanel>
                 </StackPanel>

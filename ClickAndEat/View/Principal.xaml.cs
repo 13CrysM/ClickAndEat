@@ -58,5 +58,17 @@ namespace ClickAndEat.View
             promo.Show();
             this.Close();
         }
+        private void btnUsers_Click(object sender, RoutedEventArgs e)
+        {
+            Usuarios usuarios = new Usuarios();
+            usuarios.Show();
+            this.Close();
+        }
+        private void btnMenus_Click(object sender, RoutedEventArgs e)
+        {
+            MenusDiarios menus = new MenusDiarios();
+            menus.Show();
+            this.Close();
+        }
     }
 }

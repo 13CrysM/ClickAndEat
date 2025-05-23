@@ -1,0 +1,38 @@
+﻿<Window x:Class="ClickAndEat.View.MenusDiarios"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClickAndEat.View"
+        mc:Ignorable="d"
+        Title="MenusDiarios" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Barra superior -->
+        <Grid Grid.Row="0">
+            <DockPanel LastChildFill="False" Background="#a4f0b7" Height="80" VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10">
+                    <Image Source="/Image/logo.png" Height="70" Width="80" />
+                    <StackPanel Orientation="Vertical" Margin="5,0,30,0" VerticalAlignment="Center">
+                        <TextBlock Text="Menús Disponibles" FontWeight="Bold" FontSize="14" Foreground="Black" />
+                    </StackPanel>
+                </StackPanel>
+            </DockPanel>
+        </Grid>
+
+        <!-- Contenido Principal -->
+        <Grid Grid.Row="1">
+            <StackPanel>
+                <DataGrid ItemsSource="{Binding MenusDiarios}" 
+                      SelectedItem="{Binding SelectedMenu}"
+                      AutoGenerateColumns="True"  />
+                <Button Content="Agregar Menú" Command="{Binding AgregarMenuCommand}" Margin="5"/>
+                <Button Content="Eliminar Menú" Command="{Binding EliminarMenuCommand}" Margin="5"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

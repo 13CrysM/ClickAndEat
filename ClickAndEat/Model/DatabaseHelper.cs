@@ -210,7 +210,7 @@ namespace ClickAndEat.Model
             }
         }
 
-        public UserAccountModel ObtenerUsuarioPorCredenciales(string email, string password)
+        public Usuario ObtenerUsuarioPorCredenciales(string email, string password)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -224,7 +224,7 @@ namespace ClickAndEat.Model
                 {
                     if (reader.Read())
                     {
-                        return new UserAccountModel
+                        return new Usuario
                         {
                             Id = Convert.ToInt32(reader["Id"]),
                             Email = reader["Email"].ToString()

@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using ClickAndEat.Model;
 using System.Data.SqlClient;
 using System.Configuration;
+using ClickAndEat.ViewModel;
 
 
 namespace ClickAndEat.View
@@ -31,7 +32,7 @@ namespace ClickAndEat.View
             _usuarioId = usuarioId;
             this.Title += $" - Usuario: {_usuarioId}";
         }
-
+        
 
         private void btnIngresarMenu_Click(object sender, RoutedEventArgs e)
         {
