@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using ClickAndEat.Model;
 using ClickAndEat.Helpers;
+using ClickAndEat.View;
 
 
 namespace ClickAndEat.ViewModel
@@ -70,6 +71,13 @@ namespace ClickAndEat.ViewModel
                 if (usuarioRegistrado)
                 {
                     MessageBox.Show("Usuario registrado correctamente");
+                    // Crear instancia de la ventana de Login
+                    Login loginWindow = new Login();
+                    loginWindow.Show(); // Mostrar la ventana de Login
+
+                    // Cerrar la ventana actual de Registro
+                    Application.Current.Windows[0].Close();
+
                 }
                 else
                 {

@@ -89,7 +89,33 @@
                     HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top"
                     Width="220" FontFamily="Arial" FontWeight="Bold" Foreground="#FF2F753D" 
                     Grid.Row="1" Cursor="Hand" Click="btnRegistro_Click">-->
-            <Button Content="Sign Up" Command="{Binding RegistrarCommand}" />
+            <Button Content="Sign Up" Command="{Binding RegistrarCommand}" 
+                    x:Name="btnSingUp" Foreground="#FF2F753D" Height="35" HorizontalAlignment="Center"
+                    Margin="0, 30, 0, 0" VerticalAlignment="Top" Width="220" FontFamily="Arial"
+                    FontWeight="Bold" Grid.Row="1" Cursor="Hand">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#96d28a" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="AliceBlue"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}"  
+                CornerRadius="12"  
+                Padding="5"  
+                SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Center"  
+                              VerticalAlignment="Center"  
+                              RecognizesAccessKey="True"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
 
             <!--<Button.Template>
                     <ControlTemplate TargetType="Button">
