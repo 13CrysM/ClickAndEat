@@ -82,6 +82,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using BCrypt.Net;
+using System.Diagnostics;
 
 namespace ClickAndEat.Model
 {
@@ -105,16 +106,20 @@ namespace ClickAndEat.Model
         public bool RegistrarUsuario(string email, string password)
         {
             // Hashear la contraseña antes de almacenarla
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+            //string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+            DateTime fechaRegistro = DateTime.Now;
 
             using (var connection = new SqlConnection(_connectionString))
             {
-                string query = @"INSERT INTO Usuarios (Email, Password) 
-                                VALUES (@Email, @Password)";
+                string query = @"INSERT INTO Usuarios (Email, Password, FechaRegistro) 
+                                VALUES (@Email, @Password, @FechaRegistro)";
 
                 SqlCommand command = new SqlCommand(query, connection);
+                Debug.WriteLine($"Correo: {email}, pwd: {password}, fecha {fechaRegistro}");
+
                 command.Parameters.AddWithValue("@Email", email);
-                command.Parameters.AddWithValue("@Password", hashedPassword);
+                command.Parameters.AddWithValue("@Password", password);
+                command.Parameters.AddWithValue("@FechaRegistro", fechaRegistro);
 
                 try
                 {
