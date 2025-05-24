@@ -1,105 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Runtime.CompilerServices;
-using System.Security.Principal;
-using System.Security;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using ClickAndEat.Repositories;
+﻿using System.Security;
 using System.Windows.Input;
 using ClickAndEat.Model;
+using ClickAndEat.Repositories;
 
 namespace ClickAndEat.ViewModel
 {
     public class LoginViewModel : ViewModelBase
     {
-        //Campos
-        private string _username;
-        private SecureString _password;
-        private string _errorMessage;
-        private bool _isViewVisible = true;
-        private IUserRepository userRepository;
+        private readonly IUserRepository _userRepository;
 
-        //Propiedades
-        public string Username
-        {
-            get { return _username; }
-            set
-            {
-                _username = value;
-                OnPropertyChanged(nameof(Username));
+        public string Email { get; set; } = "Email";
+        public SecureString Password { get; set; }
 
-            }
-        }
-        public SecureString Password
-        {
-            get { return _password; }
-            set
-            {
-                _password = value;
-                OnPropertyChanged(nameof(Password));
-            }
-        }
-        public string ErrorMessage
-        {
-            get { return _errorMessage; }
-            set
-            {
-                _errorMessage = value;
-                OnPropertyChanged(nameof(ErrorMessage));
-            }
-        }
-        public bool IsViewVisibleI
-        {
-            get { return _isViewVisible; }
-            set
-            {
-                _isViewVisible = value;
-                OnPropertyChanged(nameof(_isViewVisible));
-            }
-        }
-        //Comandos
         public ICommand LoginCommand { get; }
-        public ICommand ShowPasswordCommand { get; }
 
-        //Constructor
-
-        public LoginViewModel()
+        public LoginViewModel(IUserRepository userRepository)
         {
-            userRepository = new UserRepository();
-            LoginCommand = new ViewModelCommand(
-                ExecuteLoginCommand,
-                CanExecuteLoginCommand);
-
+            _userRepository = userRepository;
+            LoginCommand = new RelayCommand(Login, CanLogin);
         }
-        private bool CanExecuteLoginCommand(object obj)
+
+        private bool CanLogin() => !string.IsNullOrWhiteSpace(Email) && Password?.Length > 0;
+
+        private void Login()
         {
-            bool validData;
-            if (string.IsNullOrWhiteSpace(Username)
-                || Username.Length < 3
-                || Password == null
-                || Password.Length < 3)
-                validData = false;
-            else
-                validData = true;
-            return validData;
-        }
-        public void ExecuteLoginCommand(object obj)
-        {
-            var isValidUser = userRepository.AuthenticateUser(
-                new NetworkCredential(Username, Password));
-            if (isValidUser)
+            string plainPassword = ConvertToUnsecureString(Password);
+            var usuario = _userRepository.ObtenerPorCredenciales(Email, plainPassword);
+
+            if (usuario != null)
             {
-                Thread.CurrentPrincipal = new GenericPrincipal(
-                    new GenericIdentity(Username), null);
-                isValidUser = false;
+                // Lógica de navegación a otra vista
             }
             else
             {
-                ErrorMessage = "* Invalid username or password";
+                // Mostrar mensaje de error (manejado por la vista)
+            }
+        }
+
+        private string ConvertToUnsecureString(SecureString securePassword)
+        {
+            if (securePassword == null)
+                return string.Empty;
+
+            System.IntPtr unmanagedString = System.Runtime.InteropServices.Marshal.SecureStringToGlobalAllocUnicode(securePassword);
+            try
+            {
+                return System.Runtime.InteropServices.Marshal.PtrToStringUni(unmanagedString);
+            }
+            finally
+            {
+                System.Runtime.InteropServices.Marshal.ZeroFreeGlobalAllocUnicode(unmanagedString);
             }
         }
     }

@@ -15,7 +15,8 @@ using System.Windows.Shapes;
 using ClickAndEat.Model;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
-using System.Security; // para convertir SecureString a string
+using System.Security;
+using ClickAndEat.Helpers; // para convertir SecureString a string
 
 namespace ClickAndEat.View
 {
@@ -125,6 +126,7 @@ namespace ClickAndEat.View
 
                     if (usuario != null)
                     {
+                        SessionManager.UsuarioActual = usuario; // Desde LoginViewModel
                         Menu menuWindow = new Menu(usuario.Id);
                         menuWindow.Show();
                         this.Close();

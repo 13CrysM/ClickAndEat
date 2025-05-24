@@ -27,5 +27,11 @@ namespace ClickAndEat.View
             DataContext = new UsuariosViewModel(); // Asignamos el ViewModel a la vista
 
         }
+        private void btnRegresar_Click(object sender, RoutedEventArgs e)
+        {
+            Principal principal = new Principal();
+            principal.Show();
+            this.Close();
+        }
     }
 }

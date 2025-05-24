@@ -16,6 +16,7 @@ using ClickAndEat.Model;
 using System.Data.SqlClient;
 using System.Configuration;
 using ClickAndEat.ViewModel;
+using ClickAndEat.Repositories;
 
 
 namespace ClickAndEat.View
@@ -26,13 +27,13 @@ namespace ClickAndEat.View
     public partial class Menu : Window
     {
         private int _usuarioId;
+
         public Menu(int usuarioId)
         {
             InitializeComponent();
             _usuarioId = usuarioId;
             this.Title += $" - Usuario: {_usuarioId}";
         }
-        
 
         private void btnIngresarMenu_Click(object sender, RoutedEventArgs e)
         {
@@ -111,6 +112,7 @@ namespace ClickAndEat.View
                 MessageBox.Show($"Ocurrió un error: {ex.Message}", "Error general", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
         private bool ValidarCamposRequeridos()
         {
             // Validar kcal numéricos
@@ -153,6 +155,7 @@ namespace ClickAndEat.View
 
             return true;
         }
+
         private void MostrarError(string mensaje, Control control)
         {
             MessageBox.Show(mensaje, "Validación", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -182,31 +185,21 @@ namespace ClickAndEat.View
             txtCenaKcal.Text = "";
             txtCenaComentarios.Text = "";
         }
-        
-        /*{
-            // Validar que los campos obligatorios no estén vacíos
-            if (string.IsNullOrWhiteSpace(txtDesayunoPlatillo.Text))
+        private void btnCerrarSesion_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("¿Estás segura de que deseas cerrar sesión?", "Cerrar sesión", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
             {
-                MostrarError("Por favor ingrese el platillo del desayuno", txtDesayunoPlatillo);
-                return false;
+                Login login = new Login();
+                login.Show();
+                this.Close();
             }
-
-            if (string.IsNullOrWhiteSpace(txtDesayunoKcal.Text))
-            {
-                MostrarError("Por favor ingrese las kcal del desayuno", txtDesayunoKcal);
-                return false;
-            }
-
-            // Agregar validaciones similares para comida y cena si son requeridas
-
-            return true;
-        }*/
-
-
+        }
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
-            
+
         }
 
         private void btnRegistro_Click(object sender, RoutedEventArgs e)
@@ -223,6 +216,7 @@ namespace ClickAndEat.View
             Principal menu = new Principal();
             menu.Show();
             this.Close();
+
         }
         private void btnPromo_Click(object sender, RoutedEventArgs e)
         {

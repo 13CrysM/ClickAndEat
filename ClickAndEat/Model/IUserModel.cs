@@ -10,11 +10,14 @@ namespace ClickAndEat.Model
     public interface IUserRepository
     {
         bool AuthenticateUser(NetworkCredential credential);
-        void Add(UserModel userModel);
-        void Edit(UserModel userModel);
+        void Add(Usuario userModel);
+        void Edit(Usuario userModel);
         void Remove(int id);
-        UserModel GetById(int id);
-        UserModel GetByUsername(string username);
+        Usuario GetById(int id);
+        Usuario Email(string email);
+        //UserModel GetByUsername(string username);
         void Delete(object user);
+        object ObtenerPorCredenciales(string email, string plainPassword);
+        void GuardarMenu(MenuDiario nuevoMenu);
     }
 }

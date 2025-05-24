@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ClickAndEat.View"
         mc:Ignorable="d"
         Title="MenusDiarios" Height="450" Width="800">
-    <Grid>
+    <Grid Background="#c2f3cc">
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
@@ -14,7 +14,7 @@
 
         <!-- Barra superior -->
         <Grid Grid.Row="0">
-            <DockPanel LastChildFill="False" Background="#a4f0b7" Height="80" VerticalAlignment="Top">
+            <DockPanel LastChildFill="False" Background="#a4f0b7" Height="80" VerticalAlignment="Top" >
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10">
                     <Image Source="/Image/logo.png" Height="70" Width="80" />
                     <StackPanel Orientation="Vertical" Margin="5,0,30,0" VerticalAlignment="Center">
@@ -25,14 +25,82 @@
         </Grid>
 
         <!-- Contenido Principal -->
-        <Grid Grid.Row="1">
-            <StackPanel>
-                <DataGrid ItemsSource="{Binding MenusDiarios}" 
+        <Grid Grid.Row="1" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <DataGrid ItemsSource="{Binding MenusDiarios}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True" Background="#c2f3cc" BorderBrush="Transparent">
+
+                    <DataGrid.Resources>
+                    <!-- Encabezado personalizado -->
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="#a4f0b7"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="FontSize" Value="13"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="Height" Value="30"/>
+                        </Style>
+                    </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <!-- Columnas basadas en tu tabla SQL -->
+                    <DataGridTextColumn Header="ID" Binding="{Binding MenuId}" />
+                    <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha}" Width="120"/>
+
+                    <!-- Desayuno -->
+                    <DataGridTextColumn Header="Desayuno" Binding="{Binding DesayunoPlatillo}" Width="150"/>
+                    <DataGridTextColumn Header="Ingredientes D." Binding="{Binding DesayunoIngrediente}" Width="200"/>
+                    <DataGridTextColumn Header="Distribución D." Binding="{Binding DesayunoDistribucion}" Width="150"/>
+                    <DataGridTextColumn Header="Kcal D." Binding="{Binding DesayunoKcal}" Width="80"/>
+                    <DataGridTextColumn Header="Comentarios D." Binding="{Binding DesayunoComentarios}" Width="200"/>
+
+                    <!-- Comida -->
+                    <DataGridTextColumn Header="Comida" Binding="{Binding ComidaPlatillo}" Width="150"/>
+                    <DataGridTextColumn Header="Ingredientes C." Binding="{Binding ComidaIngrediente}" Width="200"/>
+                    <DataGridTextColumn Header="Distribución C." Binding="{Binding ComidaDistribucion}" Width="150"/>
+                    <DataGridTextColumn Header="Kcal C." Binding="{Binding ComidaKcal}" Width="80"/>
+                    <DataGridTextColumn Header="Comentarios C." Binding="{Binding ComidaComentarios}" Width="200"/>
+
+                    <!-- Cena -->
+                    <DataGridTextColumn Header="Cena" Binding="{Binding CenaPlatillo}" Width="150"/>
+                    <DataGridTextColumn Header="Ingredientes Ce." Binding="{Binding CenaIngrediente}" Width="200"/>
+                    <DataGridTextColumn Header="Distribución Ce." Binding="{Binding CenaDistribucion}" Width="150"/>
+                    <DataGridTextColumn Header="Kcal Ce." Binding="{Binding CenaKcal}" Width="80"/>
+                    <DataGridTextColumn Header="Comentarios Ce." Binding="{Binding CenaComentarios}" Width="200"/>
+
+                    <DataGridTextColumn Header="Usuario ID" Binding="{Binding UsuarioId}" Width="80"/>
+                </DataGrid.Columns>
+                    
+
+                </DataGrid>
+
+                <!--<DataGrid ItemsSource="{Binding MenusDiarios}" 
                       SelectedItem="{Binding SelectedMenu}"
-                      AutoGenerateColumns="True"  />
-                <Button Content="Agregar Menú" Command="{Binding AgregarMenuCommand}" Margin="5"/>
-                <Button Content="Eliminar Menú" Command="{Binding EliminarMenuCommand}" Margin="5"/>
-            </StackPanel>
+                      AutoGenerateColumns="True"  />-->
+                <!--<Button Content="Agregar Menú" Command="{Binding AgregarMenuCommand}" Margin="5"/>
+                <Button Content="Eliminar Menú" Command="{Binding EliminarMenuCommand}" Margin="5"/>-->
+                <Button Content="Regresar" Width="150" Height="40"
+                    Background="#96d28a" Foreground="Black" FontWeight="Bold"
+                    HorizontalAlignment="Center" Margin="0,10"
+
+                    BorderThickness="0" Padding="5" FontSize="14"
+                    Click="btnRegresar_Click">
+                <!--<Button Command="{Binding GuardarMenuCommand}" Content="Guardar Menú" >-->
+
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="20" Padding="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                </Button>
+            
         </Grid>
     </Grid>
 </Window>

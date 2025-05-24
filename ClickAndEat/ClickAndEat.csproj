@@ -78,18 +78,16 @@
     <Compile Include="CustomControls\BindablePasswordBox.xaml.cs">
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\SessionManager.cs" />
     <Compile Include="Model\IUserModel.cs" />
     <Compile Include="Model\MenuDiario.cs" />
-    <Compile Include="Model\UserAccountModel.cs" />
-    <Compile Include="Model\UserModel.cs" />
     <Compile Include="Model\Usuarios.cs" />
+    <Compile Include="Repositories\MenuRepository.cs" />
     <Compile Include="Repositories\MenusDiarioRepository.cs" />
-    <Compile Include="Repositories\RepositoryBase.cs" />
-    <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\UsuarioRepository.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MenusDiariosViewModel.cs" />
-    <Compile Include="ViewModel\RecordViewModel.cs" />
+    <Compile Include="ViewModel\MenuViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\UsuarioViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
@@ -109,9 +107,6 @@
     </Compile>
     <Compile Include="View\Promociones.xaml.cs">
       <DependentUpon>Promociones.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\RecordsView.xaml.cs">
-      <DependentUpon>RecordsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Usuarios.xaml.cs">
       <DependentUpon>Usuarios.xaml</DependentUpon>
@@ -149,10 +144,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Promociones.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\RecordsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -212,8 +203,6 @@
   <ItemGroup>
     <Resource Include="Image\img-promos.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

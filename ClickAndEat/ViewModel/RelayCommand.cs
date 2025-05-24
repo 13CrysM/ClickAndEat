@@ -29,6 +29,8 @@ namespace ClickAndEat.ViewModel
         }
 
         public void RaiseCanExecuteChanged() => CommandManager.InvalidateRequerySuggested();
+
     }
+
 }
 

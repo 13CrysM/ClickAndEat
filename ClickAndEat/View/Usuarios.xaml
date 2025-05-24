@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ClickAndEat.View"
         mc:Ignorable="d"
         Title="Usuarios" Height="450" Width="800">
-    <Grid>
+    <Grid  Background="#c2f3cc">
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
@@ -25,14 +25,53 @@
         </Grid>
 
         <!-- Contenido Principal -->
-        <Grid Grid.Row="1">
-            <StackPanel>
-                <DataGrid ItemsSource="{Binding Usuarios}" 
-                      SelectedItem="Binding SelectedUsuario"
-                      AutoGenerateColumns="True" />
-                <Button Content="Agregar Usuario" Command="{Binding AgregarUsuarioCommand}" Margin="5"/>
-                <Button Content="Eliminar Usuario" Command="{Binding EliminarUsuarioCommand}" Margin="5"/>
-            </StackPanel>
+        <Grid Grid.Row="1" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <DataGrid ItemsSource="{Binding Usuarios}" 
+                      AutoGenerateColumns="False" 
+                      IsReadOnly="True" HorizontalAlignment="Center" Background="#c2f3cc" BorderBrush="Transparent">
+                <DataGrid.Resources>
+                     <!--Encabezado personalizado-->
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="#a4f0b7"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontSize" Value="13"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="Height" Value="30"/>
+                    </Style>
+                </DataGrid.Resources>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
+                    <DataGridTextColumn Header="Password" Binding="{Binding Password}" />
+                    <DataGridTextColumn Header="Fecha Registro" Binding="{Binding FechaRegistro}" />
+                </DataGrid.Columns>
+        </DataGrid>
+        <!--<Button Content="Agregar Usuario" Command="{Binding AgregarUsuarioCommand}" Margin="5"/>
+                <Button Content="Eliminar Usuario" Command="{Binding EliminarUsuarioCommand}" Margin="5"/>-->
+                <Button Content="Regresar" Width="150" Height="40"
+                        Background="#96d28a" Foreground="Black" FontWeight="Bold"
+                        HorizontalAlignment="Center" Margin="0,10"
+                        BorderThickness="0" Padding="5" FontSize="14"
+                        Click="btnRegresar_Click">      
+                    <!--<Button Command="{Binding GuardarMenuCommand}" Content="Guardar Menú" >-->
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}"
+                CornerRadius="20" Padding="5">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            
         </Grid>
     </Grid>
 </Window>

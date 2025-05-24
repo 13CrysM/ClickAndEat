@@ -162,7 +162,7 @@
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Platillo:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
 
-                        <TextBox x:Name="txtDesayunoPlatillo" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                        <TextBox x:Name="txtDesayunoPlatillo" Width="120" Style="{StaticResource RoundedTextBoxStyle}" />
 
                     </StackPanel>
 
@@ -197,7 +197,7 @@
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Comentarios:" FontWeight="Bold" Width="80" VerticalAlignment="Top"/>
 
-                        <TextBox x:Name="txtDesayunoComentarios" Width="120" Height="60" TextWrapping="Wrap" Style="{StaticResource RoundedTextBoxStyle}" TextChanged="TextBox_TextChanged"/>
+                        <TextBox x:Name="txtDesayunoComentarios" Width="120" Height="60" TextWrapping="Wrap" Style="{StaticResource RoundedTextBoxStyle}" />
 
                     </StackPanel>
                 </StackPanel>
@@ -304,8 +304,9 @@
 
                     BorderThickness="0" Padding="5" FontSize="14"
                     Click="btnIngresarMenu_Click">
+                <!--<Button Command="{Binding GuardarMenuCommand}" Content="Guardar Menú" >-->
 
-                <Button.Template>
+            <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}"
                                 CornerRadius="20" Padding="5">

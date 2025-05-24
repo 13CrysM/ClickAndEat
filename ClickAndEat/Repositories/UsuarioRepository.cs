@@ -8,10 +8,12 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using ClickAndEat.Model;
+using System.ComponentModel;
+using System.Net;
 
 namespace ClickAndEat.Repositories
 {
-    public class UsuarioRepository : IDisposable
+    public class UsuarioRepository : IUserRepository, IDisposable
     {
         private readonly SqlConnection _connection;
         private bool _disposed = false;
@@ -55,8 +57,8 @@ namespace ClickAndEat.Repositories
                 throw;
             }
         }
-
-        public void Agregar(Usuario usuario)
+        //Add metodo
+        public void Agregar(Usuario usuario) 
         {
             try
             {
@@ -84,7 +86,7 @@ namespace ClickAndEat.Repositories
                 throw;
             }
         }
-
+        //Delete metodo
         public bool Eliminar(int id)
         {
             try
@@ -105,7 +107,7 @@ namespace ClickAndEat.Repositories
                 throw;
             }
         }
-
+        //GetById metodo
         public Usuario ObtenerPorId(int id)
         {
             try
@@ -136,7 +138,41 @@ namespace ClickAndEat.Repositories
                 throw;
             }
         }
-
+        //Edit metodo
+        public void Edit(Usuario userModel)
+        {
+            //using (var connection = GetConnection())
+            using (var command = new SqlCommand())
+            {
+                _connection.Open();
+                command.Connection = _connection;
+                command.CommandText = "UPDATE [User] SET Password=@Password, Name=@Name, LastName=@LastName, " +
+                    "Email=@Email WHERE UserName=@UserName";
+                command.Parameters.AddWithValue("@Id", userModel.Id);
+                //command.Parameters.AddWithValue("@Usename", userModel.Username);
+                //command.Parameters.AddWithValue("@Name", userModel.Name);
+                //command.Parameters.AddWithValue("@LastName", userModel.LastName);
+                command.Parameters.AddWithValue("@Email", userModel.Email);
+                command.ExecuteNonQuery();
+                _connection.Close();
+            }
+        }
+        //AuthenticUser metodo
+        public bool AuthenticateUser(NetworkCredential credential)
+        {
+            bool validUser;
+            //using (var connection = GetConnection())
+            using (var command = new SqlCommand())
+            {
+                _connection.Open();
+                command.Connection = _connection;
+                command.CommandText = "select * from [User] where Email=@Email and [Password]=@Password";
+                command.Parameters.Add("@Email", System.Data.SqlDbType.NVarChar).Value = credential.UserName; // Use UserName as Email
+                command.Parameters.Add("@Password", System.Data.SqlDbType.NVarChar).Value = credential.Password;
+                validUser = command.ExecuteScalar() == null ? false : true;
+            }
+            return validUser;
+        }
         #region IDisposable
         public void Dispose()
         {
@@ -157,6 +193,62 @@ namespace ClickAndEat.Repositories
                 _disposed = true;
             }
         }
+
+        public void Add(Usuario userModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Usuario GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Usuario Email(string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(object user)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
+        
+        public Usuario ObtenerPorCredenciales(string email, string password)
+        {
+            using (var command = new SqlCommand("SELECT Id, Email, Password FROM Usuarios WHERE Email = @Email", _connection))
+            {
+                command.Parameters.AddWithValue("@Email", email);
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read() && BCrypt.Net.BCrypt.Verify(password, reader["Password"].ToString()))
+                    {
+                        return new Usuario
+                        {
+                            Id = Convert.ToInt32(reader["Id"]),
+                            Email = reader["Email"].ToString(),
+                            Password = reader["Password"].ToString()
+                        };
+                    }
+                }
+            }
+            return null;
+        }
+
+        object IUserRepository.ObtenerPorCredenciales(string email, string plainPassword)
+        {
+            return ObtenerPorCredenciales(email, plainPassword);
+        }
+
+        public void GuardarMenu(MenuDiario nuevoMenu)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
