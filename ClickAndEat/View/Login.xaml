@@ -7,6 +7,7 @@
         xmlns:viewModel="clr-namespace:ClickAndEat.ViewModel"
         xmlns:customcontrols="clr-namespace:ClickAndEat.CustomControls"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="Login" Height="450" Width="320">
     <Grid Background="#FF37834D">
         <Grid.ColumnDefinitions>

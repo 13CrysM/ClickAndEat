@@ -54,9 +54,14 @@ namespace ClickAndEat.View
 
         private void btnPromo_Click(object sender, RoutedEventArgs e)
         {
+            this.Hide(); //Oculta la ventana Principal
+
             Promociones promo = new Promociones();
+            promo.Closed += (s, args) =>
+            {
+                this.Show(); // Vuelve a mostrar la ventana original al cerrar Usuarios
+            };
             promo.Show();
-            this.Close();
         }
         private void btnUsers_Click(object sender, RoutedEventArgs e)
         {

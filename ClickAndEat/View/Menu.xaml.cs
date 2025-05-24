@@ -185,17 +185,7 @@ namespace ClickAndEat.View
             txtCenaKcal.Text = "";
             txtCenaComentarios.Text = "";
         }
-        private void btnCerrarSesion_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult result = MessageBox.Show("¿Estás segura de que deseas cerrar sesión?", "Cerrar sesión", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            if (result == MessageBoxResult.Yes)
-            {
-                Login login = new Login();
-                login.Show();
-                this.Close();
-            }
-        }
+        
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
@@ -213,22 +203,66 @@ namespace ClickAndEat.View
         }
         private void btnMain_Click(object sender, RoutedEventArgs e)
         {
-            Principal menu = new Principal();
-            menu.Show();
-            this.Close();
+            MessageBoxResult result = MessageBox.Show("¿Estás segura de que deseas cerrar sesión?", "Cerrar sesión", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                Principal menu = new Principal();
+                menu.Show();
+                this.Close();
+            }
+            
 
         }
         private void btnPromo_Click(object sender, RoutedEventArgs e)
         {
+            this.Hide(); //Oculta la ventana Menu
+
             Promociones promo = new Promociones();
+            promo.Closed += (s, args) =>
+            {
+                this.Show(); // Vuelve a mostrar la ventana original al cerrar Usuarios
+            };
             promo.Show();
-            this.Close();
         }
         private void btnInicio_Click(object sender, RoutedEventArgs e)
         {
             Login inicio = new Login();
             inicio.Show();
             this.Close();
+        }
+        private void btnUsers_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide(); //Oculta la ventana Menu
+
+            Usuarios usuarios = new Usuarios();
+            usuarios.Closed += (s, args) =>
+            {
+                this.Show(); // Vuelve a mostrar la ventana original al cerrar Usuarios
+            };
+            usuarios.Show();
+        }
+        private void btnMenus_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide(); //Oculta la ventana Menu
+
+            MenusDiarios menus = new MenusDiarios();
+            menus.Closed += (s, args) =>
+            {
+                this.Show(); // Vuelve a mostrar la ventana original al cerrar Usuarios
+            };
+            menus.Show();
+        }
+        private void btnCerrarSesion_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("¿Estás segura de que deseas cerrar sesión?", "Cerrar sesión", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                Login login = new Login();
+                login.Show();
+                this.Close();
+            }
         }
     }
 }

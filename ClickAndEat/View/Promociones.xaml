@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClickAndEat.View"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="Promociones" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -25,7 +26,7 @@
                         <Button Content="Tu menú" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnMenu" Click="btnMenu_Click"/>
                         <Button Content="Promociones" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnPromo" Click="btnPromo_Click"/>
                         <Button Content="Iniciar Sesión" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnInicio" Click="btnInicio_Click"/>
-                        <Button Content="Registrarse" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnRegistro" Click="btnRegistro_Click"/>
+                        <!--<Button Content="Registrarse" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnRegistro" Click="btnRegistro_Click"/>-->
 
                     </StackPanel>
                 </StackPanel>

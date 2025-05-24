@@ -1,7 +1,7 @@
 ﻿<Window x:Class="ClickAndEat.View.Menu"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-
+        WindowStartupLocation="CenterScreen"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClickAndEat.View"
@@ -137,10 +137,11 @@
                     <Button Content="Quiénes somos" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnMain" Click="btnMain_Click" />
                     <Button Content="Tu menú" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnMenu" Click="btnMenu_Click"/>
                     <Button Content="Promociones" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnPromo" Click="btnPromo_Click"/>
-                    <Button Content="Iniciar Sesión" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnInicio" Click="btnInicio_Click"/>
-                    <Button Content="Registrarse" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnRegistro" Click="btnRegistro_Click"/>
-
-
+                    <!--<Button Content="Iniciar Sesión" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnInicio" Click="btnInicio_Click"/>
+                    <Button Content="Registrarse" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnRegistro" Click="btnRegistro_Click"/>-->
+                    <Button Content="Lista Usuarios" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnUsers" Click="btnUsers_Click"/>
+                    <Button Content="Lista Menus" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnMenus" Click="btnMenus_Click"/>
+                    <Button Content="Cerrar sesión" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnCerrarSesion" Click="btnCerrarSesion_Click"/>
                 </StackPanel>
             </StackPanel>
         </DockPanel>
