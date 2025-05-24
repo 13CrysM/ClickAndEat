@@ -24,22 +24,30 @@
                     <Image x:Name="icon_email" HorizontalAlignment="Left" Height="21"
                    Margin="10,0,0,0" VerticalAlignment="Center" Width="21" 
                    Source="/Image/icon_email.png" RenderTransformOrigin="0.452,0.126"/>
-                    <TextBox x:Name="email" HorizontalAlignment="Left"
+                    <!--<TextBox x:Name="email" HorizontalAlignment="Left"
                      TextWrapping="Wrap"  VerticalAlignment="Center" 
                      Width="173" TextChanged="email_TextChanged" Height="28" 
                      Background="#FF66B878" FontFamily="Arial" FontWeight="Bold" 
                      Foreground="#FFE0EDD3" VerticalContentAlignment="Center" Margin="41,0,0,0"
                      BorderBrush="{x:Null}" SelectionBrush="{x:Null}">
-                    </TextBox>
+                    </TextBox>-->
+                    <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" 
+                             x:Name="email" HorizontalAlignment="Left" TextWrapping="Wrap"
+                             VerticalAlignment="Center" Width="173" TextChanged="email_TextChanged"
+                             Height="28" Background="#FF66B878" FontFamily="Arial" FontWeight="Bold"
+                             Foreground="#FFE0EDD3" VerticalContentAlignment="Center" Margin="41, 0,0,0"
+                             BorderBrush="{x:Null}" SelectionBrush="{x:Null}"/>
+                    
+
                 </Grid>
             </Border>
             <Border CornerRadius="12"
-            Background="#FF66B878"
-            Margin="0,25,0,0"
-            Height="38"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Width="220" Grid.Row="1">
+                    Background="#FF66B878"
+                    Margin="0,25,0,0"
+                    Height="38"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Width="220" Grid.Row="1">   
                 <!--<Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Image x:Name="icon_password" HorizontalAlignment="Left" Height="21"
                    Margin="10,0,0,0" VerticalAlignment="Center" Width="21" 
@@ -53,15 +61,19 @@
                     </TextBox>
                 </Grid>-->
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                    <customcontrols:BindablePasswordBox
+                    <!--<customcontrols:BindablePasswordBox
         Password="{Binding Password,
         Mode=TwoWay,
         UpdateSourceTrigger=PropertyChanged}"
         Height="28"
         Margin="10, 5, 0, 10"
         x:Name="passwordControl">
-
-                    </customcontrols:BindablePasswordBox>
+                        
+                    </customcontrols:BindablePasswordBox>-->
+                    <customcontrols:BindablePasswordBox Password="{Binding Password, Mode=TwoWay}" 
+                                                        Height="28" 
+                                                        Margin="10, 5, 0, 10"
+                                                        x:Name="passwordControl" />
                     <!--<Image x:Name="icon_password" HorizontalAlignment="Left" Height="21" 
        Margin="10,0,0,0" VerticalAlignment="Center" Width="21" 
        Source="/Image/icon_password.png" RenderTransformOrigin="0.452,0.126"/>
@@ -73,19 +85,22 @@
          VerticalContentAlignment="Center" Margin="41,0,0,0" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"></TextBox>-->
                 </Grid>
             </Border>
-            <Button Background="#96d28a" Height="35" x:Name="btnRegistro" Content="Sign Up"
+            <!--<Button Background="#96d28a" Height="35" x:Name="btnRegistro" Content="Sign Up"
                     HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top"
                     Width="220" FontFamily="Arial" FontWeight="Bold" Foreground="#FF2F753D" 
-                    Grid.Row="1" Cursor="Hand" Click="btnRegistro_Click">
-                <Button.Template>
+                    Grid.Row="1" Cursor="Hand" Click="btnRegistro_Click">-->
+            <Button Content="Sign Up" Command="{Binding RegistrarCommand}" />
+
+            <!--<Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}" CornerRadius="12"
                         Padding="5" SnapsToDevicePixels="True">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
                         </Border>
                     </ControlTemplate>
-                </Button.Template>
-            </Button>
+            </Button.Template>-->
+            
+            
         </StackPanel>
     </Grid>
 </Window>

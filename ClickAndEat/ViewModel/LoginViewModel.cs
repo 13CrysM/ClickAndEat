@@ -14,11 +14,11 @@ namespace ClickAndEat.ViewModel
 
         public ICommand LoginCommand { get; }
 
-        public LoginViewModel(IUserRepository userRepository)
+        /*public LoginViewModel(IUserRepository userRepository)
         {
             _userRepository = userRepository;
             LoginCommand = new RelayCommand(Login, CanLogin);
-        }
+        }*/
 
         private bool CanLogin() => !string.IsNullOrWhiteSpace(Email) && Password?.Length > 0;
 

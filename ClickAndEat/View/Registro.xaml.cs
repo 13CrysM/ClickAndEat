@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ClickAndEat.Helpers;
 using ClickAndEat.Model;
+using ClickAndEat.ViewModel;
 
 namespace ClickAndEat.View
 {
@@ -27,6 +28,8 @@ namespace ClickAndEat.View
         public Registro()
         {
             InitializeComponent();
+            DataContext = new RegistroViewModel();
+
             email.Text = "Email";
             email.GotFocus += RemovePlaceholderText;
             email.LostFocus += AddPlaceholderText;
@@ -51,10 +54,11 @@ namespace ClickAndEat.View
             {
                 textBox.Text = textBox == email ? "Email" : "Password";
                 textBox.FontWeight = FontWeights.Normal;
+                
             }
         }
 
-        private void btnRegistro_Click(object sender, RoutedEventArgs e)
+        /*private void btnRegistro_Click(object sender, RoutedEventArgs e)
         {
             string userEmail = email.Text.Trim();
             //string userPassword = passwordControl.Password();
@@ -91,7 +95,7 @@ namespace ClickAndEat.View
                        /*SessionManager.UsuarioActual = usuario; // Desde LoginViewModel
                         Menu menuWindow = new Menu(usuario.Id);
                         menuWindow.Show();
-                        this.Close();*/
+                        this.Close();
                         Principal mainWindow = new Principal();
                         mainWindow.Show();
                         this.Close();
@@ -106,8 +110,9 @@ namespace ClickAndEat.View
             {
                 MessageBox.Show($"Error: {ex.Message}");
             }
-        }
-        private string ConvertToUnsecureString(SecureString securePassword)
+        }*/
+        
+        /*private string ConvertToUnsecureString(SecureString securePassword)
         {
             if (securePassword == null)
                 return string.Empty;
@@ -122,7 +127,7 @@ namespace ClickAndEat.View
             {
                 Marshal.ZeroFreeGlobalAllocUnicode(unmanagedString);
             }
-        }
+        }*/
 
         private void email_TextChanged(object sender, TextChangedEventArgs e)
         {
