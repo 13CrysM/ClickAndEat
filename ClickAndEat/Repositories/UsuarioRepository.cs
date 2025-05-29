@@ -32,19 +32,23 @@ namespace ClickAndEat.Repositories
             try
             {
                 Debug.WriteLine("🔍 Consultando usuarios en BD...");
-                using (var command = new SqlCommand("SELECT Id, Email, Password, FechaRegistro FROM Usuarios", _connection))
+                using (var command = new SqlCommand("SELECT Id, Email, Password, FechaRegistro, Nombre, Direccion, Perfil FROM Usuarios", _connection))
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        Console.WriteLine($"FechaRegistro: {reader["FechaRegistro"]}");
+                        //Console.WriteLine($"FechaRegistro: {reader["FechaRegistro"]}");
                         usuarios.Add(new Usuario
                         {
                             Id = Convert.ToInt32(reader["Id"]),
                             //Nombre = reader["Nombre"].ToString(),
                             Email = reader["Email"].ToString(),
                             Password = "*****",
+                            Nombre = reader["Nombre"].ToString(),
+                            Direccion = reader["Direccion"].ToString(),
+                            Perfil = reader["Perfil"].ToString(),
                             FechaRegistro = reader["FechaRegistro"] != DBNull.Value ? Convert.ToDateTime(reader["FechaRegistro"]) : DateTime.MinValue // O algún valor por defecto
+
                         });
                     }
                 }
@@ -58,7 +62,7 @@ namespace ClickAndEat.Repositories
             }
         }
         //Add metodo
-        public void Agregar(Usuario usuario) 
+        public void Agregar(Usuario usuario)
         {
             try
             {
@@ -164,12 +168,14 @@ namespace ClickAndEat.Repositories
             //using (var connection = GetConnection())
             using (var command = new SqlCommand())
             {
-                _connection.Open();
+                //_connection.Open();
                 command.Connection = _connection;
-                command.CommandText = "select * from [User] where Email=@Email and [Password]=@Password";
+                command.CommandText = "select * from Usuarios where Email=@Email and [Password]=@Password";
                 command.Parameters.Add("@Email", System.Data.SqlDbType.NVarChar).Value = credential.UserName; // Use UserName as Email
                 command.Parameters.Add("@Password", System.Data.SqlDbType.NVarChar).Value = credential.Password;
+
                 validUser = command.ExecuteScalar() == null ? false : true;
+                Debug.WriteLine($"🔴 AuthenticateUser: {validUser}");
             }
             return validUser;
         }
@@ -219,7 +225,7 @@ namespace ClickAndEat.Repositories
             throw new NotImplementedException();
         }
         #endregion
-        
+
         public Usuario ObtenerPorCredenciales(string email, string password)
         {
             using (var command = new SqlCommand("SELECT Id, Email, Password FROM Usuarios WHERE Email = @Email", _connection))
@@ -252,3 +258,59 @@ namespace ClickAndEat.Repositories
         }
     }
 }
+/*
+ * using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using TuApp.Model;
+
+namespace TuApp.Repositories
+{
+    public class UsuarioRepository
+    {
+        private static List<Usuario> _usuarios = new List<Usuario>();
+
+        public List<Usuario> ObtenerTodos() => _usuarios;
+
+        public void Agregar(Usuario usuario)
+        {
+            usuario.Id = _usuarios.Count + 1;
+            _usuarios.Add(usuario);
+        }
+
+        public bool Eliminar(int id)
+        {
+            var u = ObtenerPorId(id);
+            return u != null && _usuarios.Remove(u);
+        }
+
+        public Usuario ObtenerPorId(int id)
+        {
+            return _usuarios.FirstOrDefault(u => u.Id == id);
+        }
+
+        public void Edit(Usuario userModel)
+        {
+            var original = ObtenerPorId(userModel.Id);
+            if (original != null)
+            {
+                original.Nombre = userModel.Nombre;
+                original.Email = userModel.Email;
+                original.Password = userModel.Password;
+                original.Perfil = userModel.Perfil;
+            }
+        }
+
+        public bool AuthenticateUser(NetworkCredential credential)
+        {
+            return _usuarios.Any(u => u.Email == credential.UserName && u.Password == credential.Password);
+        }
+
+        public Usuario ObtenerPorCredenciales(string email, string password)
+        {
+            return _usuarios.FirstOrDefault(u => u.Email == email && u.Password == password);
+        }
+    }
+}
+
+ */

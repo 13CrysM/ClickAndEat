@@ -24,8 +24,7 @@ namespace ClickAndEat.View
         public Usuarios()
         {
             InitializeComponent();
-            DataContext = new UsuariosViewModel(); // Asignamos el ViewModel a la vista
-
+            DataContext = new UsuariosViewModel(); // si aplica
         }
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
         {

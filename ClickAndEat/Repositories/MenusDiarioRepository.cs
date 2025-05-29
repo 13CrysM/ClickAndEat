@@ -41,19 +41,19 @@ namespace ClickAndEat.Repositories
                             Fecha = Convert.ToDateTime(reader["Fecha"]),
 
                             DesayunoPlatillo = reader["DesayunoPlatillo"].ToString(),
-                            DesayunoIngrediente = reader["DesayunoIngredientes"].ToString(),
+                            DesayunoIngredientes = reader["DesayunoIngredientes"].ToString(),
                             DesayunoDistribucion = reader["DesayunoDistribucion"].ToString(),
                             DesayunoKcal = Convert.ToInt32(reader["DesayunoKcal"]),
                             DesayunoComentarios = reader["DesayunoComentarios"].ToString(),
 
                             ComidaPlatillo = reader["ComidaPlatillo"].ToString(),
-                            ComidaIngrediente = reader["ComidaIngredientes"].ToString(),
+                            ComidaIngredientes = reader["ComidaIngredientes"].ToString(),
                             ComidaDistribucion = reader["ComidaDistribucion"].ToString(),
                             ComidaKcal = Convert.ToInt32(reader["ComidaKcal"]),
                             ComidaComentarios = reader["ComidaComentarios"].ToString(),
 
                             CenaPlatillo = reader["CenaPlatillo"].ToString(),
-                            CenaIngrediente = reader["CenaIngredientes"].ToString(),
+                            CenaIngredientes = reader["CenaIngredientes"].ToString(),
                             CenaDistribucion = reader["CenaDistribucion"].ToString(),
                             CenaKcal = Convert.ToInt32(reader["CenaKcal"]),
                             CenaComentarios = reader["CenaComentarios"].ToString(),
@@ -72,36 +72,54 @@ namespace ClickAndEat.Repositories
             }
         }
 
-        public MenuDiario ObtenerPorId(int id)
+        public List<MenuDiario> ObtenerPorUsuarioId(int usuarioId)
         {
+            var menus = new List<MenuDiario>();
             try
             {
-                Debug.WriteLine($"🔍 Consultando menú con ID {id} en BD...");
-                using (var command = new SqlCommand("SELECT * FROM MenusDiarios WHERE MenuId = @MenuId", _connection))
+                Debug.WriteLine($"🔍 Consultando menús del usuario {usuarioId} en BD...");
+                using (var command = new SqlCommand("SELECT * FROM MenusDiarios WHERE UsuarioId = @UsuarioId", _connection))
                 {
-                    command.Parameters.AddWithValue("@MenuId", id);
+                    command.Parameters.AddWithValue("@UsuarioId", usuarioId);
                     using (var reader = command.ExecuteReader())
                     {
-                        if (reader.Read())
+                        while (reader.Read())
                         {
-                            return new MenuDiario
+                            menus.Add(new MenuDiario
                             {
                                 MenuId = Convert.ToInt32(reader["MenuId"]),
+                                Fecha = Convert.ToDateTime(reader["Fecha"]),
+
                                 DesayunoPlatillo = reader["DesayunoPlatillo"].ToString(),
+                                DesayunoIngredientes = reader["DesayunoIngredientes"].ToString(),
+                                DesayunoDistribucion = reader["DesayunoDistribucion"].ToString(),
+                                DesayunoKcal = Convert.ToInt32(reader["DesayunoKcal"]),
+                                DesayunoComentarios = reader["DesayunoComentarios"].ToString(),
+
                                 ComidaPlatillo = reader["ComidaPlatillo"].ToString(),
+                                ComidaIngredientes = reader["ComidaIngredientes"].ToString(),
+                                ComidaDistribucion = reader["ComidaDistribucion"].ToString(),
+                                ComidaKcal = Convert.ToInt32(reader["ComidaKcal"]),
+                                ComidaComentarios = reader["ComidaComentarios"].ToString(),
+
                                 CenaPlatillo = reader["CenaPlatillo"].ToString(),
-                                //Fecha = Convert.ToDateTime(reader["Fecha"]),
+                                CenaIngredientes = reader["CenaIngredientes"].ToString(),
+                                CenaDistribucion = reader["CenaDistribucion"].ToString(),
+                                CenaKcal = Convert.ToInt32(reader["CenaKcal"]),
+                                CenaComentarios = reader["CenaComentarios"].ToString(),
+
                                 UsuarioId = Convert.ToInt32(reader["UsuarioId"])
-                            };
+                            });
                         }
                     }
                 }
-                Debug.WriteLine($"🔴 No se encontró menú con ID {id}");
-                return null;
+
+                Debug.WriteLine($"✅ Se encontraron {menus.Count} menús para el usuario {usuarioId}");
+                return menus;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"🔴 Error al leer menú: {ex.Message}");
+                Debug.WriteLine($"🔴 Error al obtener menús del usuario {usuarioId}: {ex.Message}");
                 throw;
             }
         }

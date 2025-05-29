@@ -90,9 +90,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\IntConverter.cs" />
     <Compile Include="CustomControls\BindablePasswordBox.xaml.cs">
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\SecureStringHelper.cs" />
     <Compile Include="Helpers\SessionManager.cs" />
     <Compile Include="Model\IUserModel.cs" />
     <Compile Include="Model\MenuDiario.cs" />
@@ -241,5 +243,9 @@
   <ItemGroup>
     <Resource Include="Image\carrito_sin_fondo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\localizacion.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

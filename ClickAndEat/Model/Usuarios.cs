@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClickAndEat.Model
 {
@@ -15,6 +11,9 @@ namespace ClickAndEat.Model
         public string Password { get; set; } // Contraseña
 
         public DateTime FechaRegistro { get; set; } // Fecha de creación
+        public string Nombre { get; set; } // Nombre del usuario
+        public string Perfil { get; set; } // Perfil del usuario (ej. Administrador, Cliente, etc.)
+        public string Direccion { get; set; } // Dirección del usuario
 
         // Constructor opcional para inicializar propiedades
         public Usuario()

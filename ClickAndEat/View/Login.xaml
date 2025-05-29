@@ -39,7 +39,7 @@
                            Source="/Image/icon_email.png" RenderTransformOrigin="0.452,0.126"/>
                 <TextBox x:Name="email" HorizontalAlignment="Left" 
                              TextWrapping="Wrap"  VerticalAlignment="Center" 
-                             Width="173" TextChanged="textBox_TextChanged_1" Height="28" 
+                             Width="173" Height="28" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
                              Background="#FF66B878" FontFamily="Arial" FontWeight="Bold" 
                              Foreground="#FFE0EDD3" 
                              VerticalContentAlignment="Center" Margin="41,0,0,0" BorderBrush="{x:Null}" SelectionBrush="{x:Null}"></TextBox>
@@ -61,7 +61,6 @@
                     Height="28"
                     Margin="10, 5, 0, 10"
                     x:Name="passwordControl">
-
                 </customcontrols:BindablePasswordBox>
                 <!--<Image x:Name="icon_password" HorizontalAlignment="Left" Height="21" 
                    Margin="10,0,0,0" VerticalAlignment="Center" Width="21" 
@@ -82,7 +81,7 @@
                 Height="35"   
                HorizontalAlignment="Left"  
                Margin="50,213,0,0" VerticalAlignment="Top" Width="220"  
-               FontFamily="Arial" FontWeight="Bold" Grid.Row="1" Cursor="Hand" Click="btnLogin_Click">
+               FontFamily="Arial" FontWeight="Bold" Grid.Row="1" Cursor="Hand">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="#96d28a" />
@@ -110,13 +109,13 @@
         <Button x:Name="button_signup" Content="Sign Up" HorizontalAlignment="Left" 
                 Margin="50,253,0,0" VerticalAlignment="Top" Width="49" 
                 Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFACECAF" 
-                FontFamily="Arial" Click="button_signup_Click" FontWeight="Regular" Grid.Row="1"/>
+                FontFamily="Arial" FontWeight="Regular" Grid.Row="1"
+                Command="{Binding AbrirRegistroCommand}"/>
         <Button x:Name="button_forgot" Content="Forgot Password?" HorizontalAlignment="Left" 
             Margin="169,253,0,0" VerticalAlignment="Top" Width="101" 
             Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFACECAF" 
             FontFamily="Arial" Click="button1_Click" FontWeight="Regular" Grid.Row="1"/>
-        <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" FontSize="12" FontWeight="Medium"
-                   FontFamily="Arial" Margin="50,0,50,0" TextWrapping="Wrap"/>
-
+        <!--<TextBlock Text="{Binding ErrorMessage}" Foreground="Red" FontSize="12" FontWeight="Medium"
+                   FontFamily="Arial" Margin="50,0,50,0" TextWrapping="Wrap"/>-->
     </Grid>
 </Window>

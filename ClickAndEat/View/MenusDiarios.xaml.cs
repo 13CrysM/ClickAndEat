@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ClickAndEat.Model;
+using ClickAndEat.Repositories;
 using ClickAndEat.ViewModel;
 
 
@@ -21,10 +23,24 @@ namespace ClickAndEat.View
     /// </summary>
     public partial class MenusDiarios : Window
     {
+        private Usuario _usuario;
+        private MenusDiarioRepository _menuDiarioRepository;
         public MenusDiarios()
         {
             InitializeComponent();
             DataContext = new MenusDiariosViewModel(); // Asignamos el ViewModel a la vista
+
+        }
+        public MenusDiarios(Usuario usuario)
+        {
+            InitializeComponent();
+            _usuario = usuario;
+            Console.WriteLine($"   👤 MenusDiarios: {_usuario.Nombre}, id: {_usuario.Id}, perfil: {_usuario.Perfil}");
+            //_menuDiarioRepository = new MenusDiarioRepository();
+
+            //var listaMenus = _menuDiarioRepository.ObtenerPorUsuarioId(_usuario.Id); // <--- aquí truena si _usuario es null
+            Console.WriteLine($"   👤 user menusdiarios a ViewModel: {_usuario.Id}");
+            DataContext = new MenusDiariosViewModel(_usuario);
 
         }
 

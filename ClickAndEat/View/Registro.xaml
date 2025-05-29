@@ -8,37 +8,46 @@
         xmlns:local="clr-namespace:ClickAndEat.View"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Registro" Height="450" Width="320" >
+        Title="Registro" Height="550" Width="400" >
     <Grid Background="#FF37834D">
         <StackPanel Width="220" Grid.Row="1" Orientation="Vertical" Margin="0,25,0,10">
             <Image Source="/Image/carrito_sin_fondo.png" Width="100" Height="100"/>
-            
             <Border CornerRadius="12" 
-            Background="#FF66B878"
-            Margin="0,30,0,0"
-            Height="38"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Width="220" Grid.Row="1">
+                    Background="#FF66B878"
+                    Margin="0,15,0,0"
+                    Height="38"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Width="220" Grid.Row="1">
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image x:Name="nombre_img" HorizontalAlignment="Left" Height="21"
+                           Margin="10,0,0,0" VerticalAlignment="Center" Width="21" 
+                           Source="/Image/user-icon.png" RenderTransformOrigin="0.452,0.126"/>
+                    <TextBox Text="{Binding Nombre, UpdateSourceTrigger=PropertyChanged}" 
+                             x:Name="nombre" HorizontalAlignment="Left" TextWrapping="Wrap"
+                             VerticalAlignment="Center" Width="173" 
+                             Height="28" Background="#FF66B878" FontFamily="Arial" FontWeight="Bold"
+                             Foreground="#FFE0EDD3" VerticalContentAlignment="Center" Margin="41, 0,0,0"
+                             BorderBrush="{x:Null}" SelectionBrush="{x:Null}"/>
+                </Grid>
+            </Border>
+            <Border CornerRadius="12" 
+                    Background="#FF66B878"
+                    Margin="0,15,0,0"
+                    Height="38"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Width="220" Grid.Row="1">
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Image x:Name="icon_email" HorizontalAlignment="Left" Height="21"
                    Margin="10,0,0,0" VerticalAlignment="Center" Width="21" 
                    Source="/Image/icon_email.png" RenderTransformOrigin="0.452,0.126"/>
-                    <!--<TextBox x:Name="email" HorizontalAlignment="Left"
-                     TextWrapping="Wrap"  VerticalAlignment="Center" 
-                     Width="173" TextChanged="email_TextChanged" Height="28" 
-                     Background="#FF66B878" FontFamily="Arial" FontWeight="Bold" 
-                     Foreground="#FFE0EDD3" VerticalContentAlignment="Center" Margin="41,0,0,0"
-                     BorderBrush="{x:Null}" SelectionBrush="{x:Null}">
-                    </TextBox>-->
                     <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" 
                              x:Name="email" HorizontalAlignment="Left" TextWrapping="Wrap"
-                             VerticalAlignment="Center" Width="173" TextChanged="email_TextChanged"
-                             Height="28" Background="#FF66B878" FontFamily="Arial" FontWeight="Bold"
-                             Foreground="#FFE0EDD3" VerticalContentAlignment="Center" Margin="41, 0,0,0"
-                             BorderBrush="{x:Null}" SelectionBrush="{x:Null}"/>
-                    
-
+                             VerticalAlignment="Center" Width="173" Height="28" 
+                             Background="#FF66B878" FontFamily="Arial" FontWeight="Bold"
+                             Foreground="#FFE0EDD3" VerticalContentAlignment="Center" 
+                             Margin="41, 0,0,0" BorderBrush="{x:Null}" SelectionBrush="{x:Null}"/>
                 </Grid>
             </Border>
             <Border CornerRadius="12"
@@ -47,52 +56,87 @@
                     Height="38"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
-                    Width="220" Grid.Row="1">   
-                <!--<Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Image x:Name="icon_password" HorizontalAlignment="Left" Height="21"
-                   Margin="10,0,0,0" VerticalAlignment="Center" Width="21" 
-                   Source="/Image/key-icon.png" RenderTransformOrigin="0.452,0.126"/>
-                    <TextBox x:Name="password" HorizontalAlignment="Left"
-                     TextWrapping="Wrap" Text="Password" VerticalAlignment="Center" 
-                     Width="173" TextChanged="password_TextChanged" Height="28" 
-                     Background="#FF66B878" FontFamily="Arial" FontWeight="Bold" 
-                     Foreground="#FFE0EDD3" VerticalContentAlignment="Center" Margin="41,0,0,0"
-                     SelectionBrush="{x:Null}" BorderBrush="{x:Null}" Grid.ColumnSpan="2">
-                    </TextBox>
-                </Grid>-->
+                    Width="220" Grid.Row="1">
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                    <!--<customcontrols:BindablePasswordBox
-        Password="{Binding Password,
-        Mode=TwoWay,
-        UpdateSourceTrigger=PropertyChanged}"
-        Height="28"
-        Margin="10, 5, 0, 10"
-        x:Name="passwordControl">
-                        
-                    </customcontrols:BindablePasswordBox>-->
                     <customcontrols:BindablePasswordBox Password="{Binding Password, Mode=TwoWay}" 
                                                         Height="28" 
                                                         Margin="10, 5, 0, 10"
                                                         x:Name="passwordControl" />
-                    <!--<Image x:Name="icon_password" HorizontalAlignment="Left" Height="21" 
-       Margin="10,0,0,0" VerticalAlignment="Center" Width="21" 
-       Source="/Image/icon_password.png" RenderTransformOrigin="0.452,0.126"/>
-    <TextBox x:Name="password" HorizontalAlignment="Left" 
-         TextWrapping="Wrap" Text="Password" VerticalAlignment="Center" 
-         Width="173" TextChanged="textBox_TextChanged_1" Height="28" 
-         Background="#FF66B878" FontFamily="Arial" FontWeight="Bold" 
-         Foreground="#FFE0EDD3" 
-         VerticalContentAlignment="Center" Margin="41,0,0,0" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"></TextBox>-->
                 </Grid>
             </Border>
-            <!--<Button Background="#96d28a" Height="35" x:Name="btnRegistro" Content="Sign Up"
-                    HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top"
-                    Width="220" FontFamily="Arial" FontWeight="Bold" Foreground="#FF2F753D" 
-                    Grid.Row="1" Cursor="Hand" Click="btnRegistro_Click">-->
-            <Button Content="Sign Up" Command="{Binding RegistrarCommand}" 
-                    x:Name="btnSingUp" Foreground="#FF2F753D" Height="35" HorizontalAlignment="Center"
-                    Margin="0, 30, 0, 0" VerticalAlignment="Top" Width="220" FontFamily="Arial"
-                    FontWeight="Bold" Grid.Row="1" Cursor="Hand">
+            <Border CornerRadius="12" 
+                    Background="#FF66B878"
+                    Margin="0,15,0,0"
+                    Height="38"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Width="220" Grid.Row="1">
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="157*"/>
+                        <ColumnDefinition Width="58*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image x:Name="adress_icon" HorizontalAlignment="Left" Height="20"
+                           Margin="10,0,0,0" VerticalAlignment="Center" Width="21" 
+                           Source="/Image/localizacion.png" RenderTransformOrigin="0.452,0.126"/>
+                    <TextBox Text="{Binding Direccion, UpdateSourceTrigger=PropertyChanged}" 
+                             x:Name="adress" HorizontalAlignment="Left" TextWrapping="Wrap"
+                             VerticalAlignment="Center" Width="173" 
+                             Height="28" Background="#FF66B878" FontFamily="Arial" FontWeight="Bold"
+                             Foreground="#FFE0EDD3" VerticalContentAlignment="Center" Margin="41,0,0,0"
+                             BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Grid.ColumnSpan="2"/>
+                </Grid>
+            </Border>
+            <Border CornerRadius="12"
+                    Background="#FF66B878"
+                    Margin="0,15,0,0"
+                    Height="76"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Width="220" Grid.Row="1">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                    <ListBox ItemsSource="{Binding Roles}"
+                             SelectedItem="{Binding Perfil, Mode=TwoWay}"
+                             Margin="10,5,0,10"
+                             Background="#FF66B878"
+                             BorderBrush="{x:Null}"
+                             Foreground="#FFE0EDD3"
+                             FontFamily="Arial"
+                             FontWeight="Bold"
+                             VerticalContentAlignment="Center">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="#FFE0EDD3"/>
+                                <Setter Property="FontSize" Value="14"/>
+                                <Setter Property="Padding" Value="5"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="#FFE0EDD3"/>
+                                        <Setter Property="Foreground" Value="#FF2E5B2D"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#FFBED7A9"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <!--<ListBoxItem Content="Administrador" />
+            <ListBoxItem Content="Paciente" />-->
+                    </ListBox>
+                </Grid>
+            </Border>
+            <Button x:Name="btnSingUp" 
+                    Command="{Binding RegistrarCommand}" 
+                    Content="Sign Up" 
+                    Foreground="#FF2F753D" 
+                    Height="35" 
+                    HorizontalAlignment="Center"
+                    Margin="0, 30, 0, 0" VerticalAlignment="Top" Width="220" 
+                    FontFamily="Arial" FontWeight="Bold" Grid.Row="1" Cursor="Hand">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="#96d28a" />
@@ -106,9 +150,9 @@
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="{TemplateBinding Background}"  
-                CornerRadius="12"  
-                Padding="5"  
-                SnapsToDevicePixels="True">
+                                CornerRadius="12"  
+                                Padding="5"  
+                                SnapsToDevicePixels="True">
                             <ContentPresenter HorizontalAlignment="Center"  
                               VerticalAlignment="Center"  
                               RecognizesAccessKey="True"/>
@@ -116,17 +160,6 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-
-            <!--<Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="12"
-                        Padding="5" SnapsToDevicePixels="True">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
-                        </Border>
-                    </ControlTemplate>
-            </Button.Template>-->
-            
-            
         </StackPanel>
     </Grid>
 </Window>

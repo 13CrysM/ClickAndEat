@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
+using System.Net;
 using System.Runtime.CompilerServices;
 using System.Security;
 using System.Windows;
@@ -15,199 +17,71 @@ namespace ClickAndEat.ViewModel
 {
     public class LoginViewModel : INotifyPropertyChanged
     {
-        private string _email;
-        private SecureString _password;
-        private readonly DatabaseHelper _databaseHelper;
-        private string _errorMessage;
+        public string Email { get; set; }
+        public SecureString Password { get; set; }
+        private readonly UsuarioRepository _repo = new UsuarioRepository();
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        public ICommand LoginCommand { get; }
+        public ICommand AbrirRegistroCommand { get; }
 
         public LoginViewModel()
         {
-            _databaseHelper = new DatabaseHelper();
-            LoginCommand = new RelayCommand(ExecuteLogin, CanExecuteLogin);
+            LoginCommand = new RelayCommand(ExecuteLogin);
+            AbrirRegistroCommand = new RelayCommand(ExecuteAbrirRegistro);
         }
-        public string Email
+        private bool CanExecuteLogin(object parameter)
         {
-            get => _email;
-            set
-            {
-                _email = value;
-                OnPropertyChanged();
-            }
+            return !string.IsNullOrWhiteSpace(Email) && Password != null && Password.Length > 3;
         }
-        public SecureString Password
-        {
-            get => _password;
-            set
-            {
-                _password = value;
-                OnPropertyChanged();
-            }
-        }
-        public string ErrorMessage
-        {
-            get => _errorMessage;
-            set
-            {
-                _errorMessage = value;
-                OnPropertyChanged();
-            }
-        }
-
-
         private void ExecuteLogin(object parameter)
         {
-            string userEmail = Email?.Trim();
-            string userPassword = ConvertToUnsecureString(Password);
-
-            if (string.IsNullOrWhiteSpace(userEmail) || userEmail == "Email")
+            var credential = new NetworkCredential(Email, Password);
+            var cre = credential.UserName.Trim();
+            var pass = credential.Password.Trim();
+            if (_repo.AuthenticateUser(credential))
             {
-                MessageBox.Show("Por favor ingrese su email", "Campo requerido",
-                    MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(userPassword))
-            {
-                MessageBox.Show("Por favor ingrese su contraseña", "Campo requerido",
-                    MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            try
-            {
-                var usuarioRegistrado = _databaseHelper.ValidarUsuario(userEmail, userPassword);
-                
-                if (usuarioRegistrado)
+                Debug.WriteLine($"🔴 credential: {credential.UserName}, {credential.Password}");
+                using (DatabaseHelper db = new DatabaseHelper())
                 {
-                    var usuario = _databaseHelper.ObtenerUsuarioPorCredenciales(userEmail, userPassword);
-                    if (userEmail == "Email" || string.IsNullOrWhiteSpace(userEmail))
+                    var usuario = db.ObtenerUsuarioPorCredenciales(cre, pass);
+                    if (usuario == null)
                     {
-                        MessageBox.Show("Por favor ingrese su email", "Campo requerido",
-                                      MessageBoxButton.OK, MessageBoxImage.Warning);
-                        //email.Focus();
-                        return;
-                    }
-
-                    if (string.IsNullOrWhiteSpace(userPassword))
-                    {
-                        MessageBox.Show("Por favor ingrese su contraseña", "Campo requerido",
-                                      MessageBoxButton.OK, MessageBoxImage.Warning);
-                        //passwordControl.Focus();
-                        return;
-                    }
-
-                    try
-                    {
-                        //using (DatabaseHelper db = new DatabaseHelper())
-                        {
-                            //var usuario = db.ObtenerUsuarioPorCredenciales(userEmail, userPassword);
-
-                            if (usuario != null)
-                            {
-                                SessionManager.UsuarioActual = usuario; // Desde LoginViewModel
-                                Menu menuWindow = new Menu(usuario.Id);
-                                menuWindow.Show();
-                                //this.Close();
-                            }
-                            else
-                            {
-                                MessageBox.Show("Email o contraseña incorrectos");
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Error: {ex.Message}");
-                    }
-                
-                    /*if (usuario != null)
-                    {
-                        SessionManager.UsuarioActual = usuario; // Desde LoginViewModel
-                        Menu menuWindow = new Menu(usuario.Id);
-                        menuWindow.Show();
-                        Application.Current.Windows[0].Close();
+                        MessageBox.Show("⚠ No se encontró el usuario con esas credenciales");
                     }
                     else
                     {
-                        MessageBox.Show("Email o contraseña incorrectos");
-                    }*/
-                    /*MessageBox.Show("Usuario registrado correctamente");
-                    // Crear instancia de la ventana de Login
-                    Menu menuWindow = new Menu(usuarioRegistrado.Id);
-                    menuWindow.Show(); // Mostrar la ventana de Menu
-                    
-                   // Cerrar la ventana actual de Registro
-                    Application.Current.Windows[0].Close();*/
+                        Console.WriteLine("✅ Usuario recuperado correctamente: " + usuario.Perfil);
+                    }
 
+
+                    Menu menuWindow = new Menu(usuario);
+                    menuWindow.Show();
+                    // Cerrar la ventana actual de Registro
+                    Application.Current.Windows[0].Close();
                 }
-                else
-                {
-                    MessageBox.Show("Error de conexión.");
-                    _errorMessage = "Error de conexión.";
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error: {ex.Message}");
-            }
-        }
-        public ICommand LoginCommand { get; }
-
-        /*private readonly IUserRepository _userRepository;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public string Email { get; set; } = "Email";
-        public SecureString Password { get; set; }
-
-        public ICommand LoginCommand { get; }
-
-        /*public LoginViewModel(IUserRepository userRepository)
-        {
-            _userRepository = userRepository;
-            LoginCommand = new RelayCommand(Login, CanLogin);
-        }*/
-
-        /*private bool CanLogin() => !string.IsNullOrWhiteSpace(Email) && Password?.Length > 0;
-
-        private void Login()
-        {
-            string plainPassword = ConvertToUnsecureString(Password);
-            var usuario = _userRepository.ObtenerPorCredenciales(Email, plainPassword);
-
-            if (usuario != null)
-            {
-                // Lógica de navegación a otra vista
             }
             else
             {
-                // Mostrar mensaje de error (manejado por la vista)
-            }
-        }*/
-        
-
-        private bool CanExecuteLogin(object parameter) => !string.IsNullOrWhiteSpace(Email) && Password != null;
-
-        private string ConvertToUnsecureString(SecureString securePassword)
-        {
-            if (securePassword == null)
-                return string.Empty;
-
-            System.IntPtr unmanagedString = System.Runtime.InteropServices.Marshal.SecureStringToGlobalAllocUnicode(securePassword);
-            try
-            {
-                return System.Runtime.InteropServices.Marshal.PtrToStringUni(unmanagedString);
-            }
-            finally
-            {
-                System.Runtime.InteropServices.Marshal.ZeroFreeGlobalAllocUnicode(unmanagedString);
+                MessageBox.Show("Credenciales incorrectas");
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        private void ExecuteAbrirRegistro(object parameter)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            Registro registroWindow = new Registro(new RegistroViewModel());
+            registroWindow.Show();
+            Application.Current.Windows[0].Close();
+        }
+        private void CloseActiveWindow()
+        {
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window is Window w && w.IsActive)
+                {
+                    w.Close();
+                    break;
+                }
+            }
         }
     }
 }

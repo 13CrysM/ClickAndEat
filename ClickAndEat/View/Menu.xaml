@@ -5,10 +5,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClickAndEat.View"
+        xmlns:convint="clr-namespace:ClickAndEat.Converters" 
+        xmlns:viewmodel="clr-namespace:ClickAndEat.ViewModel"
         mc:Ignorable="d"
 
-        Title="Menu" Height="550" Width="900">
+        Title="Menu" Height="600" Width="900">
     <Window.Resources>
+        <convint:IntConverter x:Key="IntConverter" />
         <!-- Estilo para cajas de texto ovaladas -->
         <Style x:Key="RoundedTextBoxStyle" TargetType="TextBox">
             <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -29,7 +32,7 @@
             </Setter>
         </Style>
 
-        <!-- Estilo para ComboBox ovalado -->
+        <!-- Estilo para ComboBox ovalado 
         <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -117,7 +120,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>
+        </Style>-->
     </Window.Resources>
 
     <Grid Background="#c2f3cc">
@@ -134,14 +137,16 @@
                 <!-- Botones a la izquierda -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
 
-                    <Button Content="Quiénes somos" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnMain" Click="btnMain_Click" />
-                    <Button Content="Tu menú" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnMenu" Click="btnMenu_Click"/>
+                    <Button Content="Quiénes somos" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnMain" />
+                    <Button Content="Tu menú" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnMenu" />
                     <Button Content="Promociones" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnPromo" Click="btnPromo_Click"/>
                     <!--<Button Content="Iniciar Sesión" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnInicio" Click="btnInicio_Click"/>
                     <Button Content="Registrarse" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnRegistro" Click="btnRegistro_Click"/>-->
-                    <Button Content="Lista Usuarios" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnUsers" Click="btnUsers_Click"/>
-                    <Button Content="Lista Menus" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnMenus" Click="btnMenus_Click"/>
-                    <Button Content="Cerrar sesión" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnCerrarSesion" Click="btnCerrarSesion_Click"/>
+                    <Button Content="Lista Usuarios" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnUsuarios" 
+                            Click="btnUsuarios_Click" Visibility="Hidden"/>
+                    <Button Content="Lista Menus" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnMenus" 
+                            Click="btnMenus_Click" Visibility="Hidden"/>
+                    <Button Content="Cerrar sesión" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent" Margin="5" x:Name="btnCerrarSesion" Command="{Binding CerrarSesionCommand}"/>
                 </StackPanel>
             </StackPanel>
         </DockPanel>
@@ -163,154 +168,151 @@
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Platillo:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
 
-                        <TextBox x:Name="txtDesayunoPlatillo" Width="120" Style="{StaticResource RoundedTextBoxStyle}" />
+                        <TextBox x:Name="txtDesayunoPlatillo" Width="120" Style="{StaticResource RoundedTextBoxStyle}" 
+                     Text="{Binding MenuDiario.DesayunoPlatillo, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
 
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Ingredientes:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
 
-                        <TextBox x:Name="txtDesayunoIngredientes" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                        <TextBox x:Name="txtDesayunoIngredientes" Width="120" Style="{StaticResource RoundedTextBoxStyle}"
+                     Text="{Binding MenuDiario.DesayunoIngredientes, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
                     </StackPanel>
 
                     <!-- <StackPanel Orientation="Horizontal" Margin="0,5">
-                        <TextBlock Text="Distribución:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                        <ComboBox x:Name="cmbDesayunoDistribucion" Width="120" Style="{StaticResource RoundedComboBoxStyle}" SelectedIndex="0">
-                            <ComboBoxItem Content="Nutrientes"/>
-                            <ComboBoxItem Content="Calorías"/>
-                            <ComboBoxItem Content="Proteínas"/>
-                        </ComboBox>
-                    </StackPanel> -->
+            <TextBlock Text="Distribución:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
+            <ComboBox x:Name="cmbDesayunoDistribucion" Width="120" Style="{StaticResource RoundedComboBoxStyle}" SelectedIndex="0">
+                <ComboBoxItem Content="Nutrientes"/>
+                <ComboBoxItem Content="Calorías"/>
+                <ComboBoxItem Content="Proteínas"/>
+            </ComboBox>
+        </StackPanel> -->
 
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Distribucion:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                        <TextBox x:Name="txtDesayunoDistribucion" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
-
+                        <Border CornerRadius="12" BorderBrush="Gray" BorderThickness="1" 
+                                Background="White"  Padding="5,3,5,3">
+                            <ComboBox x:Name="cmbDesayunoDistribucion" SelectedItem="0" 
+                                      Width="107" Height="20" BorderThickness="0" 
+                                      Background="White"
+                                      Text="{Binding MenuDiario.DesayunoDistribucion, UpdateSourceTrigger=PropertyChanged}" Margin="0,5">
+                                <ComboBoxItem Content="Omnívora"/>
+                                <ComboBoxItem Content="Vegetariana"/>
+                                <ComboBoxItem Content="Vegana"/>
+                                <ComboBoxItem Content="Crudista"/>
+                                <ComboBoxItem Content="Keto"/>
+                                <ComboBoxItem Content="Mediterránea"/>
+                            </ComboBox>
+                        </Border>
                     </StackPanel>
-
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="kcal:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-
-                        <TextBox x:Name="txtDesayunoKcal" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
-
+                        <TextBox x:Name="txtDesayunoKcal" Width="120" 
+                                 Text="{Binding MenuDiario.DesayunoKcal, Converter={StaticResource IntConverter}, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource RoundedTextBoxStyle}"/>
                     </StackPanel>
-
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Comentarios:" FontWeight="Bold" Width="80" VerticalAlignment="Top"/>
-
-                        <TextBox x:Name="txtDesayunoComentarios" Width="120" Height="60" TextWrapping="Wrap" Style="{StaticResource RoundedTextBoxStyle}" />
-
+                        <TextBox x:Name="txtDesayunoComentarios" Width="120" Height="60" TextWrapping="Wrap" Style="{StaticResource RoundedTextBoxStyle}" 
+                                 Text="{Binding MenuDiario.DesayunoComentarios, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
                     </StackPanel>
                 </StackPanel>
-
                 <!-- Columna Comida -->
                 <StackPanel Grid.Column="1" Margin="10">
                     <TextBlock Text="Comida" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" />
-
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Platillo:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-
-                        <TextBox x:Name="txtComidaPlatillo" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
-
+                        <TextBox x:Name="txtComidaPlatillo" Width="120" Style="{StaticResource RoundedTextBoxStyle}"
+                                 Text="{Binding MenuDiario.ComidaPlatillo, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
                     </StackPanel>
-
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Ingredientes:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-
-                        <TextBox x:Name="txtComidaIngredientes" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                        <TextBox x:Name="txtComidaIngredientes" Width="120" Style="{StaticResource RoundedTextBoxStyle}"
+                                 Text="{Binding MenuDiario.ComidaIngredientes, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
                     </StackPanel>
-
-                    <!--<StackPanel Orientation="Horizontal" Margin="0,5">
-                        <TextBlock Text="Distribución:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                        <ComboBox x:Name="cmbComidaDistribucion" Width="120" Style="{StaticResource RoundedComboBoxStyle}" SelectedIndex="0">
-                            <ComboBoxItem Content="Nutrientes"/>
-                            <ComboBoxItem Content="Calorías"/>
-                            <ComboBoxItem Content="Proteínas"/>
-                        </ComboBox>
-                    </StackPanel>-->
-
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Distribucion:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                        <TextBox x:Name="txtComidaDistribucion" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
-
+                        <Border CornerRadius="12" BorderBrush="Gray" BorderThickness="1" 
+                                Background="White"  Padding="5,3,5,3">
+                            <ComboBox x:Name="cmbComidaDistribucion" SelectedItem="0" 
+                                      Width="107" Height="20" BorderThickness="0" 
+                                      Background="White" 
+                                      Text="{Binding MenuDiario.ComidaDistribucion, UpdateSourceTrigger=PropertyChanged}" Margin="0,5">
+                                <ComboBoxItem Content="Omnívora"/>
+                                <ComboBoxItem Content="Vegetariana"/>
+                                <ComboBoxItem Content="Vegana"/>
+                                <ComboBoxItem Content="Crudista"/>
+                                <ComboBoxItem Content="Keto"/>
+                                <ComboBoxItem Content="Mediterránea"/>
+                            </ComboBox>
+                        </Border>
                     </StackPanel>
-
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="kcal:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-
-                        <TextBox x:Name="txtComidaKcal" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
-
+                        <TextBox x:Name="txtComidaKcal" Width="120" 
+                                 Text="{Binding MenuDiario.ComidaKcal, Converter={StaticResource IntConverter}, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource RoundedTextBoxStyle}"/>
                     </StackPanel>
-
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Comentarios:" FontWeight="Bold" Width="80" VerticalAlignment="Top"/>
-
-                        <TextBox x:Name="txtComidaComentarios" Width="120" Height="60" TextWrapping="Wrap" Style="{StaticResource RoundedTextBoxStyle}"/>
-
+                        <TextBox x:Name="txtComidaComentarios" Width="120" Height="60" TextWrapping="Wrap" Style="{StaticResource RoundedTextBoxStyle}"
+                                 Text="{Binding MenuDiario.ComidaComentarios, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
                     </StackPanel>
                 </StackPanel>
-
                 <!-- Columna Cena -->
                 <StackPanel Grid.Column="2" Margin="50,10,0,10">
                     <TextBlock Text="Cena" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" />
-
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Platillo:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-
-                        <TextBox x:Name="txtCenaPlatillo"  Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
-
+                        <TextBox x:Name="txtCenaPlatillo"  Width="120" Style="{StaticResource RoundedTextBoxStyle}"
+                                 Text="{Binding MenuDiario.CenaPlatillo, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
                     </StackPanel>
-
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Ingredientes:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-
-                        <TextBox x:Name="txtCenaIngredientes" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
+                        <TextBox x:Name="txtCenaIngredientes" Width="120" Style="{StaticResource RoundedTextBoxStyle}"
+                                 Text="{Binding MenuDiario.CenaIngredientes, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
                     </StackPanel>
-
-                    <!--<StackPanel Orientation="Horizontal" Margin="0,5">
-                        <TextBlock Text="Distribución:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                        <ComboBox x:Name="cmbCenaDistribucion" Width="120" Style="{StaticResource RoundedComboBoxStyle}" SelectedIndex="0" >
-                            <ComboBoxItem Content="Nutrientes"/>
-                            <ComboBoxItem Content="Calorías"/>
-                            <ComboBoxItem Content="Proteínas"/>
-                        </ComboBox>
-                    </StackPanel>-->
-
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Distribucion:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-                        <TextBox x:Name="txtCenaDistribucion" Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
-
+                        <Border CornerRadius="12" BorderBrush="Gray" 
+                                BorderThickness="1" Background="White"  Padding="5,3,5,3">
+                            <ComboBox x:Name="cmbCenaDistribucion" SelectedItem="0" 
+                                      Width="107" Height="20" BorderThickness="0" 
+                                      Background="White" 
+                                      Text="{Binding MenuDiario.CenaDistribucion, UpdateSourceTrigger=PropertyChanged}" Margin="0,5">
+                                <ComboBoxItem Content="Omnívora"/>
+                                <ComboBoxItem Content="Vegetariana"/>
+                                <ComboBoxItem Content="Vegana"/>
+                                <ComboBoxItem Content="Crudista"/>
+                                <ComboBoxItem Content="Keto"/>
+                                <ComboBoxItem Content="Mediterránea"/>
+                            </ComboBox>
+                        </Border>
                     </StackPanel>
-
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="kcal:" FontWeight="Bold" Width="80" VerticalAlignment="Center"/>
-
-                        <TextBox x:Name="txtCenaKcal"  Width="120" Style="{StaticResource RoundedTextBoxStyle}"/>
-
+                        <TextBox x:Name="txtCenaKcal"  Width="120" 
+                                 Text="{Binding MenuDiario.CenaKcal, Converter={StaticResource IntConverter}, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource RoundedTextBoxStyle}"/>
                     </StackPanel>
-
                     <StackPanel Orientation="Horizontal" Margin="0,5">
                         <TextBlock Text="Comentarios:" FontWeight="Bold" Width="80" VerticalAlignment="Top"/>
-
-                        <TextBox x:Name="txtCenaComentarios" Width="120" Height="60" TextWrapping="Wrap" Style="{StaticResource RoundedTextBoxStyle}"/>
-
+                        <TextBox x:Name="txtCenaComentarios" Width="120" Height="60" TextWrapping="Wrap" Style="{StaticResource RoundedTextBoxStyle}"
+                                 Text="{Binding MenuDiario.CenaComentarios, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>
-
             <!-- Botón Ingresar Menú -->
             <Button Content="Ingresar Menú" Width="150" Height="40"
                     Background="#96d28a" Foreground="Black" FontWeight="Bold"
                     HorizontalAlignment="Center" Margin="0,10"
-
                     BorderThickness="0" Padding="5" FontSize="14"
-                    Click="btnIngresarMenu_Click">
-                <!--<Button Command="{Binding GuardarMenuCommand}" Content="Guardar Menú" >-->
-
-            <Button.Template>
+                    Command="{Binding GuardarMenuCommand}">
+                <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
-                                CornerRadius="20" Padding="5">
+                        <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="20" Padding="5">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
