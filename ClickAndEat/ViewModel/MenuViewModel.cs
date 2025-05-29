@@ -173,6 +173,13 @@ namespace ClickAndEat.ViewModel
                 MessageBox.Show("Las kcal deben ser números válidos", "Validación", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
+            if (string.IsNullOrWhiteSpace(MenuDiario.DesayunoComentarios) ||
+                string.IsNullOrWhiteSpace(MenuDiario.ComidaComentarios) ||
+                string.IsNullOrWhiteSpace(MenuDiario.CenaComentarios))
+            {
+                MessageBox.Show("Los comentarios son obligatorios", "Validación", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
             return true;
         }
         private void CerrarSesion()
